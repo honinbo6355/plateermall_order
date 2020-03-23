@@ -1,0 +1,5 @@
+1086 [main] INFO  c.p.ShoppingmallOrderBootApplication - Starting ShoppingmallOrderBootApplication on DESKTOP-35HVA1U with PID 13016 (C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot\target\classes started by notebiz in C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot)
+1098 [main] DEBUG c.p.ShoppingmallOrderBootApplication - Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+1099 [main] INFO  c.p.ShoppingmallOrderBootApplication - No active profile set, falling back to default profiles: default
+3195 [main] INFO  c.p.ShoppingmallOrderBootApplication - Started ShoppingmallOrderBootApplication in 2.645 seconds (JVM running for 3.458)
+3200 [main] DEBUG c.p.ShoppingmallOrderBootApplication - hello
