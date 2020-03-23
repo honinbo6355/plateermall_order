@@ -1,3 +1,3 @@
 # classdiagram
 
-![classdiagram](캡쳐.PNG)
+![classdiagram](./캡쳐.PNG)
