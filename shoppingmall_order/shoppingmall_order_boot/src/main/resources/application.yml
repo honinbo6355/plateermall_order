@@ -1,2 +1,10 @@
 server:
-   port: 9999
+  port: 9999
+ 
+spring:
+  profiles: local
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: newbie
+    password: newbie!
+    url: jdbc:mysql://218.38.15.94:3306/NEWBIE
