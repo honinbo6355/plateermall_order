@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+   <!-- 프로퍼티 경로 설정 및 프로퍼티 설정 -->
+   <!-- <properties resource="../properties/datasource.properties"/> -->
+<!--    <properties>-->
+<!--      <property name="url"-->
+<!--         value="jdbc:mysql://localhost:32768/shoppingmal" />-->
+<!--      <property name="userName" value="root" />-->
+<!--      <property name="password" value="1234" />-->
+<!--      <property name="driver" value="org.mariadb.jdbc.Driver" />-->
+<!--   </properties>-->
+
+
+   <!-- Mybatis의 설정 -->
+   <settings>
+      <setting name="cacheEnabled" value="true" />
+      <setting name="lazyLoadingEnabled" value="false" />
+      <setting name="defaultStatementTimeout" value="1000" />
+      <setting name="mapUnderscoreToCamelCase" value="true" />
+   </settings>
+
+<!--   &lt;!&ndash; 클래스 별명 지정 &ndash;&gt;-->
+   <typeAliases>
+<!--      <typeAlias type="io.namoosori.service.dao.CustomerDao"-->
+<!--         alias="CustomerDao" />-->
+<!--      <typeAlias type="io.namoosori.domain.goods.Goods"-->
+<!--               alias="Goods" />-->
+   </typeAliases>
+
+
+   <!-- Enum <-> String 핸들러 -->
+   <!--
+   <typeHandlers>
+      <typeHandler
+         handler="kr.co.plateer.travelclub.util.typehandler.SanghyunTypeHandler"
+         javaType="kr.co.plateer.travelclub.domain.RoleInClub"
+         jdbcType="String" />
+   </typeHandlers>
+   -->
+
+   <!-- DB에서 가져온값을 객체로 만들어주는 ObjectFactory -->
+   <!--
+   <objectFactory
+      type="kr.co.plateer.travelclub.util.objectfactory.SanghyunObjectFactory">
+      <property name="intro" value="" />
+   </objectFactory>
+   -->
+
+   <!-- 인터셉터 -->
+   <!--
+   <plugins>
+      <plugin
+         interceptor="kr.co.plateer.travelclub.util.plugin.SanghyunPlugin">
+         <property name="intro" value="" />
+      </plugin>
+   </plugins>
+   -->
+
+   <!-- 환경설정 -->
+   <!-- 개발환경 -->
+<!--   <environments default="dev">-->
+<!--      <environment id="dev">-->
+<!--         <transactionManager type="JDBC" />-->
+<!--         <dataSource type="POOLED">-->
+<!--            <property name="url" value="${url}" />-->
+<!--            <property name="username" value="${userName}" />-->
+<!--            <property name="password" value="${password}" />-->
+<!--            <property name="driver" value="${driver}" />-->
+<!--         </dataSource>-->
+<!--      </environment>-->
+   <!-- 운영환경 -->
+<!--      <environment id="prod">-->
+<!--         <transactionManager type="JDBC" />-->
+<!--         <dataSource type="POOLED">-->
+<!--            <property name="url" value="172.12.10.144" />-->
+<!--            <property name="username" value="${userName}" />-->
+<!--            <property name="password" value="${password}" />-->
+<!--            <property name="driver" value="${driver}" />-->
+<!--         </dataSource>-->
+<!--      </environment>-->
+<!--   </environments>-->
+
+
+
+
+</configuration>

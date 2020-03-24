@@ -1,0 +1,45 @@
+1086 [main] INFO  c.p.ShoppingmallOrderBootApplication - Starting ShoppingmallOrderBootApplication on DESKTOP-35HVA1U with PID 13016 (C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot\target\classes started by notebiz in C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot)
+1098 [main] DEBUG c.p.ShoppingmallOrderBootApplication - Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+1099 [main] INFO  c.p.ShoppingmallOrderBootApplication - No active profile set, falling back to default profiles: default
+3195 [main] INFO  c.p.ShoppingmallOrderBootApplication - Started ShoppingmallOrderBootApplication in 2.645 seconds (JVM running for 3.458)
+3200 [main] DEBUG c.p.ShoppingmallOrderBootApplication - hello
+1182 [main] INFO  c.p.ShoppingmallOrderBootApplication - Starting ShoppingmallOrderBootApplication on DESKTOP-35HVA1U with PID 496 (C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot\target\classes started by notebiz in C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot)
+1184 [main] DEBUG c.p.ShoppingmallOrderBootApplication - Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+1185 [main] INFO  c.p.ShoppingmallOrderBootApplication - No active profile set, falling back to default profiles: default
+3273 [main] INFO  c.p.ShoppingmallOrderBootApplication - Started ShoppingmallOrderBootApplication in 2.658 seconds (JVM running for 3.473)
+3274 [main] DEBUG c.p.ShoppingmallOrderBootApplication - hello
+1190 [main] INFO  c.p.ShoppingmallOrderBootApplication - Starting ShoppingmallOrderBootApplication on DESKTOP-35HVA1U with PID 8144 (C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot\target\classes started by notebiz in C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot)
+1194 [main] DEBUG c.p.ShoppingmallOrderBootApplication - Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+1196 [main] INFO  c.p.ShoppingmallOrderBootApplication - No active profile set, falling back to default profiles: default
+3306 [main] INFO  c.p.ShoppingmallOrderBootApplication - Started ShoppingmallOrderBootApplication in 2.689 seconds (JVM running for 3.601)
+3308 [main] DEBUG c.p.ShoppingmallOrderBootApplication - hello
+1083 [main] INFO  c.p.ShoppingmallOrderBootApplication - Starting ShoppingmallOrderBootApplication on DESKTOP-35HVA1U with PID 11844 (C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot\target\classes started by notebiz in C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot)
+1086 [main] DEBUG c.p.ShoppingmallOrderBootApplication - Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+1086 [main] INFO  c.p.ShoppingmallOrderBootApplication - No active profile set, falling back to default profiles: default
+3021 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field datasource in com.plateer.DB required a bean of type 'javax.sql.DataSource' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+The following candidates were found but could not be injected:
+	- Bean method 'dataSource' in 'JndiDataSourceAutoConfiguration' not loaded because @ConditionalOnProperty (spring.datasource.jndi-name) did not find property 'jndi-name'
+	- Bean method 'dataSource' in 'XADataSourceAutoConfiguration' not loaded because @ConditionalOnClass did not find required class 'javax.transaction.TransactionManager'
+
+
+Action:
+
+Consider revisiting the entries above or defining a bean of type 'javax.sql.DataSource' in your configuration.
+
+1431 [main] INFO  c.p.ShoppingmallOrderBootApplication - Starting ShoppingmallOrderBootApplication on DESKTOP-35HVA1U with PID 10192 (C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot\target\classes started by notebiz in C:\Users\notebiz\Documents\git\shoppingmall_order\shoppingmall_order\shoppingmall_order_boot)
+1435 [main] DEBUG c.p.ShoppingmallOrderBootApplication - Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+1436 [main] INFO  c.p.ShoppingmallOrderBootApplication - No active profile set, falling back to default profiles: default
+3886 [main] INFO  c.p.ShoppingmallOrderBootApplication - Started ShoppingmallOrderBootApplication in 3.186 seconds (JVM running for 4.127)
+3888 [main] DEBUG c.p.ShoppingmallOrderBootApplication - hello
