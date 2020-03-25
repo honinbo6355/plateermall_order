@@ -12,5 +12,6 @@
   	<module>shoppingmall_order_boot</module>
     <module>shoppingmall_order_rest</module>
     <module>shoppingmall_order_domain</module>
+      <module>shoppingmall_order_service</module>
   </modules>
 </project>
