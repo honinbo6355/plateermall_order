@@ -4,8 +4,10 @@ import com.plateer.domain.OrderState;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
+@ToString
 public class CancelOrderState implements OrderState{
 
 	private String orderId;
