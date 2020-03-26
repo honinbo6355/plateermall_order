@@ -13,5 +13,6 @@
     <module>shoppingmall_order_rest</module>
     <module>shoppingmall_order_domain</module>
       <module>shoppingmall_order_service</module>
+    <module>shoppingmall_order_store</module>
   </modules>
 </project>

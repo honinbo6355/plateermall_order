@@ -31,6 +31,7 @@ public class MybatisConfiguration {
 
 		sessionFactory.setMapperLocations(resolver.getResources("classpath*:/mapper/**/*.xml"));
 		sessionFactory.setConfigLocation(resolver.getResource("classpath:/config/mybatis-config.xml"));
+		sessionFactory.setTypeAliasesPackage("com.plateer.domain");
 		return sessionFactory.getObject();
 	}
 
