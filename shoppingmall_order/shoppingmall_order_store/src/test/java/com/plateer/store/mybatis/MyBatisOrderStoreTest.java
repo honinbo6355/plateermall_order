@@ -1,6 +1,7 @@
 package com.plateer.store.mybatis;
 
-import com.plateer.ShoppingmallOrderBootApplication;
+//import com.plateer.ShoppingmallOrderBootApplication;
+import com.plateer.MyBatisOrderTestApplication;
 import com.plateer.domain.OrderDto;
 import com.plateer.domain.OrderState;
 import com.plateer.domain.orderstate.CancelOrderState;
@@ -15,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 //@SpringBootTest(classes = MyBatisOrderTestApplication.class)
-@SpringBootTest(classes = ShoppingmallOrderBootApplication.class)
+@SpringBootTest(classes = MyBatisOrderTestApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MyBatisOrderStoreTest {
 

@@ -6,6 +6,7 @@ import java.util.List;
 import com.plateer.domain.orderstate.CancelOrderState;
 import com.plateer.domain.orderstate.ExchangeOrderState;
 import com.plateer.domain.orderstate.ReturnOrderState;
+import com.plateer.service.impl.OrderServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import com.plateer.domain.OrderDto;
@@ -18,7 +19,13 @@ exposedHeaders = {"Access-Control-Allow-Origin", "Access-Control-Allow-Credentia
 @RestController
 @RequestMapping("/api/order")
 public class OrderController {
-	
+
+	OrderServiceImpl orderService;
+
+	public OrderController(OrderServiceImpl orderService){
+		this.orderService = orderService;
+	}
+
 	@GetMapping("normalorderlist")
 	public List<OrderDto> getOrderDtoList() {
 		OrderState state = new NormalOrderState("1", "2020-03-24", "배송중");
@@ -58,5 +65,11 @@ public class OrderController {
 		}
 
 		return orderList;
+
+	}
+
+	@GetMapping("test")
+	public List<OrderDto> test(){
+		return orderService.findAllOrderFromUserId("testid");
 	}
 }

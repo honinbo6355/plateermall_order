@@ -109,13 +109,18 @@
 		</dependency>
 		<dependency>
 			<groupId>com.plateer</groupId>
+			<artifactId>shoppingmall_order_domain</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.plateer</groupId>
 			<artifactId>shoppingmall_order_service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>com.plateer</groupId>-->
-<!--			<artifactId>shoppingmall_order_store</artifactId>-->
-<!--			<version>0.0.1-SNAPSHOT</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.plateer</groupId>
+			<artifactId>shoppingmall_order_store</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
