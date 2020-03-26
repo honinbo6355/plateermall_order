@@ -24,11 +24,11 @@
       <artifactId>shoppingmall_order_domain</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>com.plateer</groupId>
       <artifactId>shoppingmall_order_boot</artifactId>
       <version>0.0.1-SNAPSHOT</version>
-    </dependency>-->
+    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
@@ -85,12 +85,12 @@
       <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>1.4.200</version>
-      <scope>test</scope>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.h2database</groupId>-->
+<!--      <artifactId>h2</artifactId>-->
+<!--      <version>1.4.200</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
 
 
   </dependencies>

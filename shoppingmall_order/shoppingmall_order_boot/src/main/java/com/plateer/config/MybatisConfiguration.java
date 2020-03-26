@@ -12,7 +12,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
-@MapperScan(basePackages = "com.plateer", lazyInitialization = "false")
+@MapperScan(basePackages = "com.plateer.store", lazyInitialization = "false")
 public class MybatisConfiguration {
 
 	private DataSource dataSource;

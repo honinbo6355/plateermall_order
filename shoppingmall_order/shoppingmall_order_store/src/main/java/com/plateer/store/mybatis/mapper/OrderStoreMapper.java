@@ -8,5 +8,6 @@ import java.util.List;
 @Mapper
 public interface OrderStoreMapper {
 
-    public List<OrderDto> findAll(String userid);
+    List<OrderDto> findAll(String userid);
+    OrderDto retriveOne(String orderid);
 }
