@@ -22,4 +22,9 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDto> findAllOrderFromUserId(String userid) {
         return orderStore.findAll(userid);
     }
+
+    @Override
+    public OrderDto findOrderFromOrderId(String orderid) {
+        return orderStore.retriveOne(orderid);
+    }
 }

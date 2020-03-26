@@ -3,10 +3,12 @@ package com.plateer.domain.orderstate;
 import com.plateer.domain.OrderState;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class CancelOrderState implements OrderState{
 

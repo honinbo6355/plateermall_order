@@ -47,6 +47,7 @@ public class OrderController {
 
 	@GetMapping("list/{state}/{userid}")
 	public List<OrderDto> getOrderStateList(@PathVariable("state") String state, @PathVariable("userid") String userid){
+		//map으로 생성자 저장하는것. 충분히 할만하다.
 		List<OrderDto> orderList = new ArrayList<>();
 		if(state.equals("cancel")){
 			OrderState cancelOrderState = new CancelOrderState("1", "2020-03-02", "취소요청");
@@ -61,6 +62,11 @@ public class OrderController {
 		else if(state.equals("return")){
 			OrderState returnOrderState = new ReturnOrderState("1", "2020-05-03", "반품진행중");
 			OrderDto orderDto1 = new OrderDto("orderid1", "userid", "1203917700",1 ,"orderprice", "2020-04-03","사이즈 : 235", returnOrderState);
+			orderList.add(orderDto1);
+		}
+		else if(state.equals("normal")){
+			OrderState normalOrderState = new NormalOrderState("202000002", "2020-03-26", "배송중");
+			OrderDto orderDto1 = new OrderDto("202000002", "testid", "1203973748",1 ,"55000", "2020-03-25","사이즈 : 235", normalOrderState);
 			orderList.add(orderDto1);
 		}
 

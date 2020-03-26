@@ -8,6 +8,6 @@
         select * from `Order` where userid = #{userid}
     </select>
     <select id="retriveOne" resultType="OrderDto">
-        select * from `Order` where orderid = #{retriveOne}
+        select * from `Order` where orderid = #{orderid}
     </select>
 </mapper>

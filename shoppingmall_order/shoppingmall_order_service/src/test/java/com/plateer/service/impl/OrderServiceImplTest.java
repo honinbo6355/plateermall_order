@@ -25,4 +25,9 @@ public class OrderServiceImplTest {
     public void test(){
         Assert.assertEquals(4 , orderService.findAllOrderFromUserId("testid").size());
     }
+
+    @Test
+    public void getOrderFromOrderidTest(){
+        Assert.assertEquals("202000002" , orderService.findOrderFromOrderId("202000002").getOrderId());
+    }
 }
