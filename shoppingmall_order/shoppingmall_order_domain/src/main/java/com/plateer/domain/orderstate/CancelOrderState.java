@@ -13,7 +13,8 @@ public class CancelOrderState implements OrderState{
 	private String orderId;
 	private String stateChangeDate;
 	private String orderState;
-	
+
+
 	@Override
 	public String getOrderId() {
 		// 
