@@ -27,4 +27,26 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto findOrderFromOrderId(String orderid) {
         return orderStore.retriveOne(orderid);
     }
+
+    @Override
+    public List<OrderDto> findNormalOrderListFromUserid(String userid) {
+        return orderStore.retriveNormalOrderList(userid);
+    }
+
+    @Override
+    public List<OrderDto> findCancelOrderListFromUserid(String userid) {
+        return orderStore.retriveCancelOrderList(userid);
+    }
+
+    @Override
+    public List<OrderDto> findExchangeOrderListFromUserid(String userid) {
+        return orderStore.retriveExchangeOrderList(userid);
+    }
+
+    @Override
+    public List<OrderDto> findReturnOrderListFromUserid(String userid) {
+        return orderStore.retriveReturnOrderList(userid);
+    }
+
+
 }

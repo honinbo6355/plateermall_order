@@ -15,29 +15,33 @@ public class CancelOrderState implements OrderState{
 	private String orderId;
 	private String stateChangeDate;
 	private String orderState;
-
+//	private Type type;
+//
+//	public enum Type {
+//		CANCEL, GOING, USE
+//	}
 
 	@Override
 	public String getOrderId() {
-		// 
+		//
 		return this.orderId;
 	}
-	
+
 	@Override
 	public String getStateChangeDate() {
-		// 
+		//
 		return this.stateChangeDate;
 	}
 
 	@Override
 	public String getOrderState() {
-		// 
+		//
 		return this.orderState;
 	}
 
 	@Override
 	public void setOrderId(String orderId) {
-		// 
+		//
 		this.orderId = orderId;
 	}
 
@@ -49,9 +53,8 @@ public class CancelOrderState implements OrderState{
 
 	@Override
 	public void setOrderState(String orderState) {
-		// 
+		//
 		this.orderState = orderState;
 	}
-
 
 }

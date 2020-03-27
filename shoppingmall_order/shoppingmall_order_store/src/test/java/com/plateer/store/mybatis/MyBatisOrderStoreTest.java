@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class MyBatisOrderStoreTest {
 
     @Autowired
-    MyBatisOrderStore OrderStore;
+    MyBatisOrderStore orderStore;
     OrderDto testOrderDto;
 
     @Before
@@ -33,13 +33,17 @@ public class MyBatisOrderStoreTest {
     @Test
     public void findAllTest(){
         //폼에서 h2 빼보기 상관없음
-        Assert.assertEquals(4, OrderStore.findAll("testid").size());
+        Assert.assertEquals(4, orderStore.findAll("testid").size());
     }
 
     @Test
     public void retrieveOne(){
-        Assert.assertEquals(testOrderDto.getOrderId(), OrderStore.retriveOne("202000001").getOrderId());
+        Assert.assertEquals(testOrderDto.getOrderId(), orderStore.retriveOne("202000001").getOrderId());
     }
 
-
+    @Test
+    public void retriveNormalOrderListTest(){
+        int size = orderStore.retriveNormalOrderList("testid").size();
+        System.out.println(size);
+    }
 }
