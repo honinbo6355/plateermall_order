@@ -33,7 +33,7 @@ public class MyBatisOrderStoreTest {
     @Test
     public void findAllTest(){
         //폼에서 h2 빼보기 상관없음
-        Assert.assertEquals(4, orderStore.findAll("testid").size());
+        Assert.assertEquals(5, orderStore.findAll("testid").size());
     }
 
     @Test
@@ -42,8 +42,11 @@ public class MyBatisOrderStoreTest {
     }
 
     @Test
-    public void retriveNormalOrderListTest(){
-        int size = orderStore.retriveNormalOrderList("testid").size();
-        System.out.println(size);
+    public void retriveOrderListTest(){
+        Assert.assertNotNull(orderStore.retriveNormalOrderList("testid"));
+        Assert.assertNotNull(orderStore.retriveExchangeOrderList("testid"));
+        Assert.assertNotNull(orderStore.retriveReturnOrderList("testid"));
+        Assert.assertNotNull(orderStore.retriveCancelOrderList("testid"));
     }
+
 }
