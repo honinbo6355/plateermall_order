@@ -45,9 +45,10 @@ public class MyBatisOrderStore implements OrderStore {
     @Override
     public List<OrderDto> retriveOrderList(String userid, Enum<OrderType> typeEnum) {
         OrderStateMapper mapper = this.mapperMap.get(typeEnum);
-
+        //이거 스트림 두개 연결해서 가능할거같은데??
         return findAll(userid).stream()
                 .map(orderDto -> {
+                    //optional?
                     OrderState normalState = mapper.getOrderFromOrderid(orderDto.getOrderId());
                     orderDto.setOrderState(normalState);
                     return orderDto;
