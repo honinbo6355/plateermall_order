@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plateer.store.mybatis.mapper.NormalOrderStateMapper">
-    <select id="getNormalOrderFromOrderid" resultType="NormalOrderState">
+    <select id="getOrderFromOrderid" resultType="NormalOrderState">
         select * from NormalOrderState where orderid = #{orderid}
     </select>
 </mapper>

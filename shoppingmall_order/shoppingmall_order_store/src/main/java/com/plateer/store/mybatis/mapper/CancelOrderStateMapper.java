@@ -5,7 +5,8 @@ import com.plateer.domain.orderstate.CancelOrderState;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface CancelOrderStateMapper {
+public interface CancelOrderStateMapper extends OrderStateMapper{
 
-    CancelOrderState getCancelOrderFromOrderid(String orderid);
+    @Override
+    CancelOrderState getOrderFromOrderid(String orderid);
 }

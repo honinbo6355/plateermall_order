@@ -1,10 +1,10 @@
 package com.plateer.store.mybatis;
 
-//import com.plateer.ShoppingmallOrderBootApplication;
 import com.plateer.MyBatisOrderTestApplication;
 import com.plateer.domain.OrderDto;
 import com.plateer.domain.OrderState;
 import com.plateer.domain.orderstate.CancelOrderState;
+import com.plateer.domain.orderstate.OrderType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-//@SpringBootTest(classes = MyBatisOrderTestApplication.class)
 @SpringBootTest(classes = MyBatisOrderTestApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MyBatisOrderStoreTest {
@@ -42,11 +41,10 @@ public class MyBatisOrderStoreTest {
     }
 
     @Test
-    public void retriveOrderListTest(){
-        Assert.assertNotNull(orderStore.retriveNormalOrderList("testid"));
-        Assert.assertNotNull(orderStore.retriveExchangeOrderList("testid"));
-        Assert.assertNotNull(orderStore.retriveReturnOrderList("testid"));
-        Assert.assertNotNull(orderStore.retriveCancelOrderList("testid"));
+    public void retriveOrderFromMapTest(){
+        System.out.println(orderStore.retriveOrderList("testid", OrderType.NORMAL));
+        System.out.println(orderStore.retriveOrderList("testid", OrderType.CANCEL));
+        System.out.println(orderStore.retriveOrderList("testid", OrderType.EXCHANGE));
+        System.out.println(orderStore.retriveOrderList("testid", OrderType.RETURN));
     }
-
 }

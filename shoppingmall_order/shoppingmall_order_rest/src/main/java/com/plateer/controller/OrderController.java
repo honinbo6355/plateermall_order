@@ -30,22 +30,10 @@ public class OrderController {
 		return orderService.findOrderFromOrderId(orderId);
 	}
 
-
 	@GetMapping("/list/{state}/{userid}")
 	public List<OrderDto> getOrderStateList(@PathVariable("state") String state, @PathVariable("userid") String userid){
 		Enum<OrderType> requestOrderType = OrderType.valueOf(state.toUpperCase());
-		if(OrderType.NORMAL == requestOrderType){
-			return orderService.findNormalOrderListFromUserid(userid);
-		}
-		else if(OrderType.CANCEL == requestOrderType){
-			return orderService.findCancelOrderListFromUserid(userid);
-		}
-		else if(OrderType.EXCHANGE == requestOrderType){
-			return orderService.findExchangeOrderListFromUserid(userid);
-		}
-		else if(OrderType.RETURN == requestOrderType){
-			return orderService.findReturnOrderListFromUserid(userid);
-		}
-		return null;
+		return orderService.findOrderListFromUserid(userid, requestOrderType);
 	}
+
 }

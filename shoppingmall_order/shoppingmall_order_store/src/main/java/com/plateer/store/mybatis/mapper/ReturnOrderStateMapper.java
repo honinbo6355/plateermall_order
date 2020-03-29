@@ -5,6 +5,8 @@ import com.plateer.domain.orderstate.ReturnOrderState;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ReturnOrderStateMapper {
-    ReturnOrderState getReturnOrderFromOrderid(String orderid);
+public interface ReturnOrderStateMapper extends OrderStateMapper{
+
+    @Override
+    ReturnOrderState getOrderFromOrderid(String orderid);
 }

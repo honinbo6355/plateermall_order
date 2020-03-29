@@ -1,6 +1,7 @@
 package com.plateer.service.impl;
 
 import com.plateer.domain.OrderDto;
+import com.plateer.domain.orderstate.OrderType;
 import com.plateer.service.OrderService;
 import com.plateer.store.OrderStore;
 import com.plateer.store.mybatis.MyBatisOrderStore;
@@ -17,7 +18,6 @@ public class OrderServiceImpl implements OrderService {
         this.orderStore = orderStore;
     }
 
-
     @Override
     public List<OrderDto> findAllOrderFromUserId(String userid) {
         return orderStore.findAll(userid);
@@ -29,24 +29,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> findNormalOrderListFromUserid(String userid) {
-        return orderStore.retriveNormalOrderList(userid);
+    public List<OrderDto> findOrderListFromUserid(String userid, Enum<OrderType> typeEnum) {
+        return orderStore.retriveOrderList(userid, typeEnum);
     }
-
-    @Override
-    public List<OrderDto> findCancelOrderListFromUserid(String userid) {
-        return orderStore.retriveCancelOrderList(userid);
-    }
-
-    @Override
-    public List<OrderDto> findExchangeOrderListFromUserid(String userid) {
-        return orderStore.retriveExchangeOrderList(userid);
-    }
-
-    @Override
-    public List<OrderDto> findReturnOrderListFromUserid(String userid) {
-        return orderStore.retriveReturnOrderList(userid);
-    }
-
-
 }
