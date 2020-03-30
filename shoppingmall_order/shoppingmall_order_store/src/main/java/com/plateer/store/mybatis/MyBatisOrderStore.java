@@ -40,7 +40,6 @@ public class MyBatisOrderStore implements OrderStore {
 
     @Override
     public List<OrderDto> findAllOrderFromUserid(String userid) {
-        System.out.println("Store");
         return orderStoreMapper.findAllOrderFromUserid(userid);
     }
 

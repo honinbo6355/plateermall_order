@@ -35,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> findOrderListFromUserid(String userid, OrderType typeEnum) {
+
         return orderStore.findAllOrderFromUserid(userid).stream()
                 .map(orderDto -> {
                     OrderState normalState = orderStore.retriveOrderStateFromOrderid(orderDto.getOrderId(), typeEnum);
@@ -46,11 +47,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean createOrder(OrderDto orderDto) {
-        orderDto.setOrderId(Integer.toString(orderStore.getNewOrderid()));
-        OrderState normalOrderState = new NormalOrderState(orderDto.getOrderId(), orderDto.getOrderDate(), NormalOrderState.StatusType.SHIPPING.getStatus());
+    public int createOrder(OrderDto orderDto) {
+        int newOrderId = orderStore.getNewOrderid();
+        orderDto.setOrderId(Integer.toString(newOrderId));
+        OrderState normalOrderState = new NormalOrderState(orderDto.getOrderId(), orderDto.getOrderDate(), OrderType.NORMAL.getDefaultStatus());
         orderStore.createOrder(orderDto, normalOrderState);
-        return true;
+        return newOrderId;
     }
 
     @Override

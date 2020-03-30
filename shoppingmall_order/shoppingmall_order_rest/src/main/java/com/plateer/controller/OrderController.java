@@ -37,7 +37,7 @@ public class OrderController {
 	}
 
 	@PostMapping("/order")
-	public boolean order(@RequestBody OrderDto orderDto){
+	public int order(@RequestBody OrderDto orderDto){
 		System.out.println(orderDto);
 		return orderService.createOrder(orderDto);
 	}
