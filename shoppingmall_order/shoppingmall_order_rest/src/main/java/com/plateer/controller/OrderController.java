@@ -42,7 +42,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/{original}/{changed}/{orderid}")
-	public boolean cancelOrder(@PathVariable("orderid") String orderid, @PathVariable("original") String original, @PathVariable String changed) {
+	public boolean changeOrderState(@PathVariable("orderid") String orderid, @PathVariable("original") String original, @PathVariable String changed) {
 		OrderType originalType = OrderType.valueOf(original.toUpperCase());
 		OrderType changedType = OrderType.valueOf(changed.toUpperCase());
 		orderService.changeOrderState(orderid, originalType, changedType);
