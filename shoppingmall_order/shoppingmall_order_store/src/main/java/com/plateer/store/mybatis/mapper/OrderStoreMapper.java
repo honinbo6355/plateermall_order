@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface OrderStoreMapper {
 
-    List<OrderDto> findAll(String userid);
+    List<OrderDto> findAllOrderFromUserid(String userid);
     OrderDto retriveOne(String orderid);
     int getLatestOrderId();
     int createNewOrder(OrderDto orderDto);

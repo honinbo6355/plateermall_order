@@ -9,7 +9,10 @@ import com.plateer.store.OrderStore;
 import com.plateer.store.mybatis.MyBatisOrderStore;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -22,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> findAllOrderFromUserId(String userid) {
-        return orderStore.findAll(userid);
+        return orderStore.findAllOrderFromUserid(userid);
     }
 
     @Override
@@ -31,8 +34,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> findOrderListFromUserid(String userid, Enum<OrderType> typeEnum) {
-        return orderStore.retriveOrderList(userid, typeEnum);
+    public List<OrderDto> findOrderListFromUserid(String userid, OrderType typeEnum) {
+        return orderStore.findAllOrderFromUserid(userid).stream()
+                .map(orderDto -> {
+                    OrderState normalState = orderStore.retriveOrderStateFromOrderid(orderDto.getOrderId(), typeEnum);
+                    orderDto.setOrderState(normalState);
+                    return orderDto;
+                })
+                .filter(orderDto -> orderDto.getOrderState() != null)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -41,5 +51,21 @@ public class OrderServiceImpl implements OrderService {
         OrderState normalOrderState = new NormalOrderState(orderDto.getOrderId(), orderDto.getOrderDate(), NormalOrderState.StatusType.SHIPPING.getStatus());
         orderStore.createOrder(orderDto, normalOrderState);
         return true;
+    }
+
+    @Override
+    public boolean changeOrderState(String orderid, OrderType originalType, OrderType changedType) {
+        OrderState orderState = orderStore.retriveOrderStateFromOrderid(orderid, originalType);
+        orderState.setOrderState(changedType.getDefaultStatus());
+        orderState.setStateChangeDate(getToday());
+        orderStore.deleteOrderState(orderid, originalType);
+        orderStore.createOrderState(orderState, changedType);
+        return false;
+    }
+
+    private String getToday(){
+        Date today = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(today);
     }
 }

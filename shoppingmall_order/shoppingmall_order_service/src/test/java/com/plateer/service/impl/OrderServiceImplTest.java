@@ -24,12 +24,12 @@ public class OrderServiceImplTest {
 
     @Test
     public void test(){
-        System.out.println(orderService.findOrderListFromUserid("testid", OrderType.NORMAL));
+        orderService.changeOrderState("202000006", OrderType.NORMAL, OrderType.CANCEL);
     }
 
     @Test
     public void getOrderFromOrderidTest(){
-        Assert.assertEquals("202000002" , orderService.findOrderFromOrderId("202000002").getOrderId());
+        Assert.assertEquals(3, orderService.findOrderListFromUserid("testid", OrderType.NORMAL).size());
     }
 
 }

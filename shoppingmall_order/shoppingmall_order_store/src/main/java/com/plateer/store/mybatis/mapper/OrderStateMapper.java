@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface OrderStateMapper {
 
-    OrderState getOrderFromOrderid(String orderid);
+    OrderState getOrderStateFromOrderid(String orderid);
     int createNewOrderState(OrderState orderState);
+    int deleteOrderState(String orderid);
 }

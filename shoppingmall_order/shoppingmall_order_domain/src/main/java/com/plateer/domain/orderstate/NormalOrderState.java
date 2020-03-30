@@ -21,7 +21,7 @@ public class NormalOrderState implements OrderState{
 
 		final private String status;
 
-		private StatusType(String status){
+		StatusType(String status){
 			this.status = status;
 		}
 

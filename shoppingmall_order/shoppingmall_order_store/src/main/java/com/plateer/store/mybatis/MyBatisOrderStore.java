@@ -21,7 +21,7 @@ public class MyBatisOrderStore implements OrderStore {
     private CancelOrderStateMapper cancelOrderStateMapper;
     private ExchangeOrderStateMapper exchangeOrderStateMapper;
     private ReturnOrderStateMapper returnOrderStateMapper;
-    private Map<Enum<OrderType>, OrderStateMapper> mapperMap;
+    private Map<OrderType, OrderStateMapper> mapperMap;
 
     public MyBatisOrderStore(OrderStoreMapper orderStoreMapper, NormalOrderStateMapper normalOrderStateMapper, CancelOrderStateMapper cancelOrderStateMapper,
                              ExchangeOrderStateMapper exchangeOrderStateMapper, ReturnOrderStateMapper returnOrderStateMapper){
@@ -39,9 +39,9 @@ public class MyBatisOrderStore implements OrderStore {
     }
 
     @Override
-    public List<OrderDto> findAll(String userid) {
+    public List<OrderDto> findAllOrderFromUserid(String userid) {
         System.out.println("Store");
-        return orderStoreMapper.findAll(userid);
+        return orderStoreMapper.findAllOrderFromUserid(userid);
     }
 
     @Override
@@ -49,17 +49,22 @@ public class MyBatisOrderStore implements OrderStore {
         return orderStoreMapper.retriveOne(orderid);
     }
 
+//    @Override
+//    public List<OrderDto> retriveOrderList(String userid, Enum<OrderType> typeEnum) {
+//        OrderStateMapper mapper = this.mapperMap.get(typeEnum);
+//        return findAllOrderFromUserid(userid).stream()
+//                .map(orderDto -> {
+//                    OrderState normalState = mapper.getOrderFromOrderid(orderDto.getOrderId());
+//                    orderDto.setOrderState(normalState);
+//                    return orderDto;
+//                })
+//                .filter(orderDto -> orderDto.getOrderState() != null)
+//                .collect(Collectors.toList());
+//    }
+
     @Override
-    public List<OrderDto> retriveOrderList(String userid, Enum<OrderType> typeEnum) {
-        OrderStateMapper mapper = this.mapperMap.get(typeEnum);
-        return findAll(userid).stream()
-                .map(orderDto -> {
-                    OrderState normalState = mapper.getOrderFromOrderid(orderDto.getOrderId());
-                    orderDto.setOrderState(normalState);
-                    return orderDto;
-                })
-                .filter(orderDto -> orderDto.getOrderState() != null)
-                .collect(Collectors.toList());
+    public OrderState retriveOrderStateFromOrderid(String orderid, OrderType typeEnum) {
+        return mapperMap.get(typeEnum).getOrderStateFromOrderid(orderid);
     }
 
     @Override
@@ -73,4 +78,17 @@ public class MyBatisOrderStore implements OrderStore {
         int newOrderId = orderStoreMapper.getLatestOrderId();
         return ++newOrderId;
     }
+
+    @Override
+    public boolean createOrderState(OrderState orderState, OrderType typeEnum) {
+        mapperMap.get(typeEnum).createNewOrderState(orderState);
+        return true;
+    }
+
+    @Override
+    public boolean deleteOrderState(String orderid, OrderType typeEnum) {
+        mapperMap.get(typeEnum).deleteOrderState(orderid);
+        return true;
+    }
+
 }

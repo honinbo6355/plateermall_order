@@ -15,6 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MyBatisOrderTestApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -33,7 +36,7 @@ public class MyBatisOrderStoreTest {
     @Test
     public void findAllTest(){
         //폼에서 h2 빼보기 상관없음
-        Assert.assertEquals(5, orderStore.findAll("testid").size());
+        Assert.assertEquals(6, orderStore.findAllOrderFromUserid("testid").size());
     }
 
     @Test
@@ -43,16 +46,29 @@ public class MyBatisOrderStoreTest {
 
     @Test
     public void retriveOrderFromMapTest(){
-        System.out.println(orderStore.retriveOrderList("testid", OrderType.NORMAL));
-//        System.out.println(orderStore.retriveOrderList("testid", OrderType.CANCEL));
-//        System.out.println(orderStore.retriveOrderList("testid", OrderType.EXCHANGE));
-//        System.out.println(orderStore.retriveOrderList("testid", OrderType.RETURN));
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(format.format(date));
     }
 
     @Test
     public void createOrderIdTest(){
 //        OrderState normalOrderState = new NormalOrderState(testOrderDto.getOrderId(), testOrderDto.getOrderDate(), NormalOrderState.StatusType.SHIPPING.getStatus());
 //        orderStore.createOrder(testOrderDto, normalOrderState);
+        System.out.println(OrderType.valueOf("NORMAL").toString());
+        System.out.println(OrderType.valueOf("NORMAL").getDefaultStatus());
     }
 
+    @Test
+    public void createAndRemoveOrderStateTest(){
+        OrderState normalOrderState = new NormalOrderState("1234", testOrderDto.getOrderDate(), NormalOrderState.StatusType.SHIPPING.getStatus());
+        orderStore.createOrderState(normalOrderState, OrderType.NORMAL);
+        orderStore.deleteOrderState(normalOrderState.getOrderId(), OrderType.NORMAL);
+        orderStore.createOrderState(normalOrderState, OrderType.CANCEL);
+        orderStore.deleteOrderState(normalOrderState.getOrderId(), OrderType.CANCEL);
+        orderStore.createOrderState(normalOrderState, OrderType.EXCHANGE);
+        orderStore.deleteOrderState(normalOrderState.getOrderId(), OrderType.EXCHANGE);
+        orderStore.createOrderState(normalOrderState, OrderType.RETURN);
+        orderStore.deleteOrderState(normalOrderState.getOrderId(), OrderType.RETURN);
+    }
 }

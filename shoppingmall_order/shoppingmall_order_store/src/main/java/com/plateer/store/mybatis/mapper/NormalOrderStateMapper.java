@@ -9,7 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface NormalOrderStateMapper extends OrderStateMapper {
 
     @Override
-    NormalOrderState getOrderFromOrderid(String orderid);
-    @Override
     int createNewOrderState(OrderState orderState);
 }

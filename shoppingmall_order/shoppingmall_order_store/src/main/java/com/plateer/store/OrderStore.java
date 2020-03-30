@@ -8,10 +8,13 @@ import java.util.List;
 
 public interface OrderStore {
 
-    List<OrderDto> findAll(String userid);
+    List<OrderDto> findAllOrderFromUserid(String userid);
     OrderDto retriveOne(String orderid);
 
-    List<OrderDto> retriveOrderList(String userid, Enum<OrderType> typeEnum);
+//    List<OrderDto> retriveOrderList(String userid, Enum<OrderType> typeEnum);
+    OrderState retriveOrderStateFromOrderid(String orderid, OrderType typeEnum);
     void createOrder(OrderDto orderDto, OrderState orderState);
     int getNewOrderid();
+    boolean createOrderState(OrderState orderState, OrderType typeEnum);
+    boolean deleteOrderState(String orderid, OrderType typeEnum);
 }

@@ -3,7 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plateer.store.mybatis.mapper.ReturnOrderStateMapper">
-    <select id="getOrderFromOrderid" resultType="ReturnOrderState">
+    <select id="getOrderStateFromOrderid" resultType="ReturnOrderState">
         select * from ReturnOrderState where orderid = #{orderid}
     </select>
+    <insert id="createNewOrderState">
+        insert into ReturnOrderState values (#{orderId}, #{stateChangeDate}, #{orderState})
+    </insert>
+    <delete id="deleteOrderState">
+        delete from ReturnOrderState where orderid = #{orderid}
+    </delete>
 </mapper>

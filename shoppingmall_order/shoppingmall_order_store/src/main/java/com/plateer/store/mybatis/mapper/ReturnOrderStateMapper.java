@@ -7,6 +7,4 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ReturnOrderStateMapper extends OrderStateMapper{
 
-    @Override
-    ReturnOrderState getOrderFromOrderid(String orderid);
 }

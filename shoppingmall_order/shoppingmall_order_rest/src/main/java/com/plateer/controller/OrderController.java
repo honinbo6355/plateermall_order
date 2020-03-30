@@ -32,12 +32,20 @@ public class OrderController {
 
 	@GetMapping("/list/{state}/{userid}")
 	public List<OrderDto> getOrderStateList(@PathVariable("state") String state, @PathVariable("userid") String userid){
-		Enum<OrderType> requestOrderType = OrderType.valueOf(state.toUpperCase());
+		OrderType requestOrderType = OrderType.valueOf(state.toUpperCase());
 		return orderService.findOrderListFromUserid(userid, requestOrderType);
 	}
 
 	@PostMapping("/order")
 	public boolean order(OrderDto orderDto){
 		return orderService.createOrder(orderDto);
+	}
+
+	@GetMapping("/{original}/{changed}/{orderid}")
+	public boolean cancelOrder(@PathVariable("orderid") String orderid, @PathVariable("original") String original, @PathVariable String changed) {
+		OrderType originalType = OrderType.valueOf(original.toUpperCase());
+		OrderType changedType = OrderType.valueOf(changed.toUpperCase());
+		orderService.changeOrderState(orderid, originalType, changedType);
+		return true;
 	}
 }
