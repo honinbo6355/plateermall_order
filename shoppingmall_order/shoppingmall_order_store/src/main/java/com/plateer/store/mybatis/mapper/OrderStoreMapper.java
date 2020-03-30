@@ -10,6 +10,6 @@ public interface OrderStoreMapper {
 
     List<OrderDto> findAllOrderFromUserid(String userid);
     OrderDto retriveOne(String orderid);
-    int getLatestOrderId();
+    int getNewOrderId();
     int createNewOrder(OrderDto orderDto);
 }

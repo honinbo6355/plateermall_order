@@ -30,7 +30,7 @@ public class MyBatisOrderStoreTest {
     @Before
     public void before(){
         OrderState testOrderState = new CancelOrderState("202000001", "2020-03-26", "취소요청");
-        this.testOrderDto = new OrderDto(202000001, "testid", "1203917700",1 ,"35000", "2020-03-25","사이즈 : 235", null);
+        this.testOrderDto = new OrderDto("202000001", "testid", "1203917700",1 ,"35000", "2020-03-25","사이즈 : 235", null);
     }
 
     @Test

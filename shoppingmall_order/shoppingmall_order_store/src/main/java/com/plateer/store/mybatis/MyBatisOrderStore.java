@@ -62,8 +62,7 @@ public class MyBatisOrderStore implements OrderStore {
 
     @Override
     public int getNewOrderid() {
-        int newOrderId = orderStoreMapper.getLatestOrderId();
-        return ++newOrderId;
+        return orderStoreMapper.getNewOrderId();
     }
 
     @Override
