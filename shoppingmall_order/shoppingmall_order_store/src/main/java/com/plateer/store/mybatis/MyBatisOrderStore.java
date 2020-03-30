@@ -49,19 +49,6 @@ public class MyBatisOrderStore implements OrderStore {
         return orderStoreMapper.retriveOne(orderid);
     }
 
-//    @Override
-//    public List<OrderDto> retriveOrderList(String userid, Enum<OrderType> typeEnum) {
-//        OrderStateMapper mapper = this.mapperMap.get(typeEnum);
-//        return findAllOrderFromUserid(userid).stream()
-//                .map(orderDto -> {
-//                    OrderState normalState = mapper.getOrderFromOrderid(orderDto.getOrderId());
-//                    orderDto.setOrderState(normalState);
-//                    return orderDto;
-//                })
-//                .filter(orderDto -> orderDto.getOrderState() != null)
-//                .collect(Collectors.toList());
-//    }
-
     @Override
     public OrderState retriveOrderStateFromOrderid(String orderid, OrderType typeEnum) {
         return mapperMap.get(typeEnum).getOrderStateFromOrderid(orderid);
