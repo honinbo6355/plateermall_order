@@ -15,7 +15,19 @@ public class NormalOrderState implements OrderState{
 	private String orderId;
 	private String stateChangeDate;
 	private String orderState;
-	
+
+	public enum StatusType {
+		SHIPPING("배송중"), COMPLETE("배송 완료");
+
+		final private String status;
+
+		private StatusType(String status){
+			this.status = status;
+		}
+
+		public String getStatus(){ return this.status; }
+	}
+
 	@Override
 	public String getOrderId() {
 		// 

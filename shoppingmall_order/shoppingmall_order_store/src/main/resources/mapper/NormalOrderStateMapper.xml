@@ -6,4 +6,7 @@
     <select id="getOrderFromOrderid" resultType="NormalOrderState">
         select * from NormalOrderState where orderid = #{orderid}
     </select>
+    <insert id="createNewOrderState">
+        insert into NormalOrderState values (#{orderId}, #{stateChangeDate}, #{orderState})
+    </insert>
 </mapper>

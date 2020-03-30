@@ -10,4 +10,5 @@ public interface OrderService {
     List<OrderDto> findAllOrderFromUserId(String userid);
     OrderDto findOrderFromOrderId(String orderid);
     List<OrderDto> findOrderListFromUserid(String userid, Enum<OrderType> typeEnum);
+    boolean createOrder(OrderDto orderDto);
 }

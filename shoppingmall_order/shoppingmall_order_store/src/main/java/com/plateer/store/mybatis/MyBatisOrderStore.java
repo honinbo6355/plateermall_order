@@ -17,13 +17,20 @@ import java.util.stream.Collectors;
 public class MyBatisOrderStore implements OrderStore {
 
     private OrderStoreMapper orderStoreMapper;
-
+    private NormalOrderStateMapper normalOrderStateMapper;
+    private CancelOrderStateMapper cancelOrderStateMapper;
+    private ExchangeOrderStateMapper exchangeOrderStateMapper;
+    private ReturnOrderStateMapper returnOrderStateMapper;
     private Map<Enum<OrderType>, OrderStateMapper> mapperMap;
 
     public MyBatisOrderStore(OrderStoreMapper orderStoreMapper, NormalOrderStateMapper normalOrderStateMapper, CancelOrderStateMapper cancelOrderStateMapper,
                              ExchangeOrderStateMapper exchangeOrderStateMapper, ReturnOrderStateMapper returnOrderStateMapper){
 
         this.orderStoreMapper = orderStoreMapper;
+        this.normalOrderStateMapper = normalOrderStateMapper;
+        this.cancelOrderStateMapper = cancelOrderStateMapper;
+        this.exchangeOrderStateMapper = exchangeOrderStateMapper;
+        this.returnOrderStateMapper = returnOrderStateMapper;
         this.mapperMap = new HashMap<>();
         this.mapperMap.put(OrderType.NORMAL, normalOrderStateMapper);
         this.mapperMap.put(OrderType.CANCEL, cancelOrderStateMapper);
@@ -45,15 +52,25 @@ public class MyBatisOrderStore implements OrderStore {
     @Override
     public List<OrderDto> retriveOrderList(String userid, Enum<OrderType> typeEnum) {
         OrderStateMapper mapper = this.mapperMap.get(typeEnum);
-        //이거 스트림 두개 연결해서 가능할거같은데??
         return findAll(userid).stream()
                 .map(orderDto -> {
-                    //optional?
                     OrderState normalState = mapper.getOrderFromOrderid(orderDto.getOrderId());
                     orderDto.setOrderState(normalState);
                     return orderDto;
                 })
                 .filter(orderDto -> orderDto.getOrderState() != null)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void createOrder(OrderDto orderDto, OrderState orderState) {
+        orderStoreMapper.createNewOrder(orderDto);
+        mapperMap.get(OrderType.NORMAL).createNewOrderState(orderState);
+    }
+
+    @Override
+    public int getNewOrderid() {
+        int newOrderId = orderStoreMapper.getLatestOrderId();
+        return ++newOrderId;
     }
 }

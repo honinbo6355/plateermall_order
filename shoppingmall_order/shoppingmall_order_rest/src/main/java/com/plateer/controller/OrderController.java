@@ -36,4 +36,8 @@ public class OrderController {
 		return orderService.findOrderListFromUserid(userid, requestOrderType);
 	}
 
+	@PostMapping("/order")
+	public boolean order(OrderDto orderDto){
+		return orderService.createOrder(orderDto);
+	}
 }

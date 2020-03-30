@@ -10,4 +10,10 @@
     <select id="retriveOne" resultType="OrderDto">
         select * from `Order` where orderid = #{orderid}
     </select>
+    <select id="getLatestOrderId" resultType="int">
+        SELECT MAX(orderId) from `Order`
+    </select>
+    <insert id="createNewOrder">
+        insert into `Order` values (#{orderId}, #{userId}, #{goodsId}, #{goodsCount}, #{orderPrice}, #{orderDate}, #{selectedOptions})
+    </insert>
 </mapper>
