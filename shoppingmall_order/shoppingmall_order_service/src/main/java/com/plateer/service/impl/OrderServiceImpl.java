@@ -4,9 +4,9 @@ import com.plateer.domain.OrderDto;
 import com.plateer.domain.OrderState;
 import com.plateer.domain.orderstate.*;
 import com.plateer.service.OrderService;
-import com.plateer.store.OrderStore;
 import com.plateer.store.mybatis.MyBatisOrderStore;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
     private MyBatisOrderStore orderStore;
@@ -80,11 +81,9 @@ public class OrderServiceImpl implements OrderService {
         changedState.setOrderState(changedType.getDefaultStatus());
         changedState.setStateChangeDate(getToday());
         changedState.setUserId(orderState.getUserId());
-//        orderState.setOrderState(changedType.getDefaultStatus());
-//        orderState.setStateChangeDate(getToday());
         orderStore.deleteOrderState(orderid, originalType);
         orderStore.createOrderState(orderState, changedType);
-        return false;
+        return true;
     }
 
     private String getToday(){

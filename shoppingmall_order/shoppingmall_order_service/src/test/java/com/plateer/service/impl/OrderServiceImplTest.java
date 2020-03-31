@@ -30,4 +30,8 @@ public class OrderServiceImplTest {
         System.out.println(orderService.findOrderListFromUserid("testid", OrderType.RETURN));
     }
 
+    @Test
+    public void test2(){
+        orderService.changeOrderState("202000012", OrderType.NORMAL, OrderType.CANCEL);
+    }
 }

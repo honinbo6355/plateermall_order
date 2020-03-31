@@ -44,7 +44,7 @@ public class MyBatisOrderStoreTest {
 
     @Test
     public void retrieveOne(){
-//        Assert.assertEquals(testOrderDto.getOrderId(), orderStore.retriveOne("202000001").getOrderId());
+
     }
 
     @Test
