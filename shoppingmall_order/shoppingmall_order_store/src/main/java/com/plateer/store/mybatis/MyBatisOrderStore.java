@@ -76,4 +76,9 @@ public class MyBatisOrderStore implements OrderStore {
         return true;
     }
 
+    @Override
+    public List<OrderState> findOrderStateListFromUserid(String userid, OrderType typeEnum) {
+        return mapperMap.get(typeEnum).getOrderStateListFromUserid(userid);
+    }
+
 }

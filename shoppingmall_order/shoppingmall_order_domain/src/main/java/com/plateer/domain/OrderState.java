@@ -2,15 +2,19 @@ package com.plateer.domain;
 
 public interface OrderState {
 
-	public String getOrderId();
+	String getOrderId();
 	
-	public String getStateChangeDate();
+	String getStateChangeDate();
 	
-	public String getOrderState();
+	String getOrderState();
+
+	String getUserId();
 	
-	public void setOrderId(String orderId);
+	void setOrderId(String orderId);
 	
-	public void setStateChangeDate(String stateChangeDate);
+	void setStateChangeDate(String stateChangeDate);
 	
-	public void setOrderState(String orderState);
+	void setOrderState(String orderState);
+
+	void setUserId(String userId);
 }

@@ -7,9 +7,12 @@
         select * from NormalOrderState where orderid = #{orderid}
     </select>
     <insert id="createNewOrderState">
-        insert into NormalOrderState values (#{orderId}, #{stateChangeDate}, #{orderState})
+        insert into NormalOrderState values (#{orderId}, #{stateChangeDate}, #{orderState}, #{userId})
     </insert>
     <delete id="deleteOrderState">
         delete from NormalOrderState where orderid = #{orderid}
     </delete>
+    <select id="getOrderStateListFromUserid" resultType="NormalOrderState">
+        select * from NormalOrderState where userid = #{userId}
+    </select>
 </mapper>

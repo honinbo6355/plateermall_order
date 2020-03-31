@@ -15,6 +15,7 @@ public class CancelOrderState implements OrderState{
 	private String orderId;
 	private String stateChangeDate;
 	private String orderState;
+	private String userId;
 //	private Type type;
 //
 //	public enum Type {
@@ -40,6 +41,11 @@ public class CancelOrderState implements OrderState{
 	}
 
 	@Override
+	public String getUserId() {
+		return this.userId;
+	}
+
+	@Override
 	public void setOrderId(String orderId) {
 		//
 		this.orderId = orderId;
@@ -55,6 +61,11 @@ public class CancelOrderState implements OrderState{
 	public void setOrderState(String orderState) {
 		//
 		this.orderState = orderState;
+	}
+
+	@Override
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }

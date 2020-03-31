@@ -13,6 +13,7 @@ public class ReturnOrderState implements OrderState{
 	private String orderId;
 	private String stateChangeDate;
 	private String orderState;
+	private String userId;
 	
 	@Override
 	public String getOrderId() {
@@ -33,6 +34,11 @@ public class ReturnOrderState implements OrderState{
 	}
 
 	@Override
+	public String getUserId() {
+		return userId;
+	}
+
+	@Override
 	public void setOrderId(String orderId) {
 		// 
 		this.orderId = orderId;
@@ -48,6 +54,11 @@ public class ReturnOrderState implements OrderState{
 	public void setOrderState(String orderState) {
 		// 
 		this.orderState = orderState;
+	}
+
+	@Override
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }

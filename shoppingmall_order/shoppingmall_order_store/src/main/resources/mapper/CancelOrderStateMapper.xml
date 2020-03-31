@@ -7,9 +7,12 @@
         select * from CancelOrderState where orderid = #{orderid}
     </select>
     <insert id="createNewOrderState">
-        insert into CancelOrderState values (#{orderId}, #{stateChangeDate}, #{orderState})
+        insert into CancelOrderState values (#{orderId}, #{stateChangeDate}, #{orderState}, #{userId})
     </insert>
     <delete id="deleteOrderState">
         delete from CancelOrderState where orderid = #{orderid}
     </delete>
+    <select id="getOrderStateListFromUserid" resultType="CancelOrderState">
+        select * from CancelOrderState where userid = #{userId}
+    </select>
 </mapper>

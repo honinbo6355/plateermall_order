@@ -17,4 +17,5 @@ public interface OrderStore {
     int getNewOrderid();
     boolean createOrderState(OrderState orderState, OrderType typeEnum);
     boolean deleteOrderState(String orderid, OrderType typeEnum);
+    List<OrderState> findOrderStateListFromUserid(String userid, OrderType typeEnum);
 }

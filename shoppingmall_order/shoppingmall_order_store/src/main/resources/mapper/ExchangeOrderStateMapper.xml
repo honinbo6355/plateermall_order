@@ -7,9 +7,12 @@
         select * from ExchangeOrderState where orderid = #{orderid}
     </select>
     <insert id="createNewOrderState">
-        insert into ExchangeOrderState values (#{orderId}, #{stateChangeDate}, #{orderState})
+        insert into ExchangeOrderState values (#{orderId}, #{stateChangeDate}, #{orderState}, #{userId})
     </insert>
     <delete id="deleteOrderState">
         delete from ExchangeOrderState where orderid = #{orderid}
     </delete>
+    <select id="getOrderStateListFromUserid" resultType="ExchangeOrderState">
+        select * from ExchangeOrderState where userid = #{userId}
+    </select>
 </mapper>

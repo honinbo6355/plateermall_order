@@ -38,7 +38,6 @@ public class OrderController {
 
 	@PostMapping("/order")
 	public int order(@RequestBody OrderDto orderDto){
-		System.out.println(orderDto);
 		return orderService.createOrder(orderDto);
 	}
 
