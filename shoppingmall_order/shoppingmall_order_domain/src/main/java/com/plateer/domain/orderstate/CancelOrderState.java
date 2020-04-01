@@ -2,10 +2,14 @@ package com.plateer.domain.orderstate;
 
 import com.plateer.domain.OrderState;
 
+import com.plateer.domain.StatusTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.Arrays;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,11 +20,25 @@ public class CancelOrderState implements OrderState{
 	private String stateChangeDate;
 	private String orderState;
 	private String userId;
-//	private Type type;
-//
-//	public enum Type {
-//		CANCEL, GOING, USE
-//	}
+
+	public enum StatusType implements StatusTypeEnum {
+		CANCEL_REQUEST("취소요청"), CANCEL_COMPLETE("취소완료");
+
+		final private String status;
+
+		StatusType(String status){
+			this.status = status;
+		}
+
+		@Override
+		public String getStatus(){ return this.status; }
+	}
+
+
+	@Override
+	public List<StatusTypeEnum> getStatusTypes() {
+		return Arrays.asList(StatusType.values());
+	}
 
 	@Override
 	public String getOrderId() {

@@ -81,4 +81,10 @@ public class MyBatisOrderStore implements OrderStore {
         return mapperMap.get(typeEnum).getOrderStateListFromUserid(userid);
     }
 
+    @Override
+    public int getStateCountFromUserid(String userid, String state, OrderType typeEnum) {
+        return mapperMap.get(typeEnum).countOrderState(state);
+    }
+
+
 }

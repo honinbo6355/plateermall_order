@@ -12,7 +12,7 @@ import com.plateer.domain.OrderState;
 
 @CrossOrigin(allowCredentials = "true", origins = {"*"}, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT},
 allowedHeaders = {"Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
-        "Access-Control-Request-Headers", "Access-Control-Allow-Origin", "Set-Cookie"},
+        "Access-Control-Request-Headers", "Access-Control-Allow-Origin", "Set-Cookie", "Authorization"},
 exposedHeaders = {"Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"}, maxAge = 3000)
 @RestController
 @RequestMapping("/api/order")
@@ -47,5 +47,11 @@ public class OrderController {
 		OrderType changedType = OrderType.valueOf(changed.toUpperCase());
 		orderService.changeOrderState(orderid, originalType, changedType);
 		return true;
+	}
+
+	@GetMapping("/count/{state}/{userid}")
+	public Map<String, Integer> getStateCount(@PathVariable String state, @PathVariable String userid){
+		OrderType orderType = OrderType.valueOf(state.toUpperCase());
+		return orderService.getOrderStateCount(userid, orderType);
 	}
 }

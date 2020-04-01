@@ -1,7 +1,7 @@
 package com.plateer.domain.orderstate;
 
 public enum OrderType {
-    NORMAL("배송중"), CANCEL("취소 요청"), EXCHANGE("교환 신청"), RETURN("반품 신청");
+    NORMAL("주문접수"), CANCEL("취소요청"), EXCHANGE("교환요청"), RETURN("반품요청");
 
     final private String defaultStatus;
 

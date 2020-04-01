@@ -2,6 +2,7 @@ package com.plateer.service.impl;
 
 import com.plateer.domain.OrderDto;
 import com.plateer.domain.OrderState;
+import com.plateer.domain.StatusTypeEnum;
 import com.plateer.domain.orderstate.*;
 import com.plateer.service.OrderService;
 import com.plateer.store.mybatis.MyBatisOrderStore;
@@ -42,7 +43,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> findOrderListFromUserid(String userid, OrderType typeEnum) {
-
         List<OrderDto> orderList = orderStore.findAllOrderFromUserid(userid);
         List<OrderState> stateList = orderStore.findOrderStateListFromUserid(userid, typeEnum);
         return stateList.stream()
@@ -52,16 +52,8 @@ public class OrderServiceImpl implements OrderService {
                             orderDto.setOrderState(orderState);
                             return orderDto;
                         }))
+                .sorted(Comparator.comparing(OrderDto::getOrderId).reversed())
                 .collect(Collectors.toList());
-
-//        return orderStore.findAllOrderFromUserid(userid).stream()
-//                .map(orderDto -> {
-//                    OrderState normalState = orderStore.retriveOrderStateFromOrderid(orderDto.getOrderId(), typeEnum);
-//                    orderDto.setOrderState(normalState);
-//                    return orderDto;
-//                })
-//                .filter(orderDto -> orderDto.getOrderState() != null)
-//                .collect(Collectors.toList());
     }
 
     @Override
@@ -82,8 +74,15 @@ public class OrderServiceImpl implements OrderService {
         changedState.setStateChangeDate(getToday());
         changedState.setUserId(orderState.getUserId());
         orderStore.deleteOrderState(orderid, originalType);
-        orderStore.createOrderState(orderState, changedType);
+        orderStore.createOrderState(changedState, changedType);
         return true;
+    }
+
+    @Override
+    public Map<String, Integer> getOrderStateCount(String userid, OrderType orderType) {
+        OrderState state = orderStateMap.get(orderType).get();
+        return state.getStatusTypes().stream().map(stateTypeEnum -> stateTypeEnum.getStatus())
+                    .collect(Collectors.toMap(String::toString, stateType -> orderStore.getStateCountFromUserid(userid, stateType, orderType)));
     }
 
     private String getToday(){

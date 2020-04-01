@@ -2,10 +2,13 @@ package com.plateer.domain.orderstate;
 
 import com.plateer.domain.OrderState;
 
+import com.plateer.domain.StatusTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
+
+import java.util.Arrays;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +20,8 @@ public class NormalOrderState implements OrderState{
 	private String orderState;
 	private String userId;
 
-	public enum StatusType {
-		SHIPPING("배송중"), COMPLETE("배송 완료");
+	public enum StatusType implements StatusTypeEnum {
+		ORDER_COMPLETE("주문접수"), PAYMENT_COMPLETTE("결제완료"), SHIPPING_READY("배송준비중") ,SHIPPING("배송중"), SHIPPING_COMPLETE("배송완료");
 
 		final private String status;
 
@@ -26,7 +29,14 @@ public class NormalOrderState implements OrderState{
 			this.status = status;
 		}
 
+		@Override
 		public String getStatus(){ return this.status; }
+	}
+
+
+	@Override
+	public List<StatusTypeEnum> getStatusTypes() {
+		return Arrays.asList(StatusType.values());
 	}
 
 	@Override

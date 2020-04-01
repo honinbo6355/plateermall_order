@@ -4,6 +4,7 @@ import com.plateer.domain.OrderDto;
 import com.plateer.domain.orderstate.OrderType;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrderService {
 
@@ -12,4 +13,5 @@ public interface OrderService {
     List<OrderDto> findOrderListFromUserid(String userid, OrderType typeEnum);
     int createOrder(OrderDto orderDto);
     boolean changeOrderState(String orderid, OrderType originalType, OrderType changedType);
+    Map<String, Integer> getOrderStateCount(String userid, OrderType orderType);
 }

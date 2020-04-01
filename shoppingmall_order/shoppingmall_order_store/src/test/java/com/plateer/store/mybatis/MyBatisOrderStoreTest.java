@@ -3,9 +3,7 @@ package com.plateer.store.mybatis;
 import com.plateer.MyBatisOrderTestApplication;
 import com.plateer.domain.OrderDto;
 import com.plateer.domain.OrderState;
-import com.plateer.domain.orderstate.CancelOrderState;
-import com.plateer.domain.orderstate.NormalOrderState;
-import com.plateer.domain.orderstate.OrderType;
+import com.plateer.domain.orderstate.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,71 +53,20 @@ public class MyBatisOrderStoreTest {
     }
 
     @Test
-    public void createOrderIdTest(){
-//        OrderState normalOrderState = new NormalOrderState(testOrderDto.getOrderId(), testOrderDto.getOrderDate(), NormalOrderState.StatusType.SHIPPING.getStatus());
-//        orderStore.createOrder(testOrderDto, normalOrderState);
-        System.out.println(OrderType.valueOf("NORMAL").toString());
-        System.out.println(OrderType.valueOf("NORMAL").getDefaultStatus());
-        List<OrderState> stateList = new ArrayList<>();
-        stateList.add(new NormalOrderState("1", "1", "1", "1"));
-        stateList.add(new NormalOrderState("2", "1", "1", "1"));
-        stateList.add(new NormalOrderState("3", "1", "1", "1"));
+    public void orderStateCountTest(){
+        NormalOrderState normalOrderState = new NormalOrderState();
+        CancelOrderState cancelOrderState = new CancelOrderState();
+        ExchangeOrderState exchangeOrderState = new ExchangeOrderState();
+        ReturnOrderState returnOrderState = new ReturnOrderState();
+        List<String> normalTypeStrings = normalOrderState.getStatusTypes().stream().map(statusTypeEnum -> statusTypeEnum.getStatus()).collect(Collectors.toList());
+        List<String> cancelTypeStrings = cancelOrderState.getStatusTypes().stream().map(statusTypeEnum -> statusTypeEnum.getStatus()).collect(Collectors.toList());
+        List<String> exchangeTypeStrings = exchangeOrderState.getStatusTypes().stream().map(statusTypeEnum -> statusTypeEnum.getStatus()).collect(Collectors.toList());
+        List<String> returnTypeStrings = returnOrderState.getStatusTypes().stream().map(statusTypeEnum -> statusTypeEnum.getStatus()).collect(Collectors.toList());
 
-        List<OrderDto> orderList = new ArrayList<>();
-        orderList.add(new OrderDto("1", "id", "3", 1, "1", "1", "1", null));
-        orderList.add(new OrderDto("2", "id", "3", 1, "1", "1", "1", null));
-        orderList.add(new OrderDto("4", "id", "3", 1, "1", "1", "1", null));
-        orderList.add(new OrderDto("3", "id", "3", 1, "1", "1", "1", null));
-        orderList.add(new OrderDto("5", "id", "3", 1, "1", "1", "1", null));
-        List<OrderDto> testList = stateList.stream()
-                .flatMap(orderState -> {
-                    System.out.println(orderState);
-                        return orderList.stream()
-                        .filter(orderDto -> {
-                            System.out.println(orderDto);
-                            return orderDto.getOrderId() == orderState.getOrderId();
-                        }).map(orderDto -> {
-                            orderDto.setOrderState(orderState);
-                            return orderDto;
-                        });
-                })
-                .collect(Collectors.toList());
-
-        List<OrderDto> testList2 = stateList.stream()
-                .flatMap(orderState -> orderList.stream()
-                        .filter(orderDto -> orderDto.getOrderId() == orderState.getOrderId())
-                        .map(orderDto -> {
-                            orderDto.setOrderState(orderState);
-                            return orderDto;
-                        }))
-                .collect(Collectors.toList());
-
-        System.out.println(testList);
-        System.out.println(testList2);
-        System.out.println("-----------------------------------");
-//        List<OrderDto> testList2 = orderList.stream()
-//                .filter(orderDto -> {
-//                    System.out.println(orderDto);
-//                    return stateList.stream().anyMatch(orderState -> {
-//                        System.out.println(orderState);
-//                        return orderState.getOrderId() == orderDto.getOrderId();
-//                    });
-//                })
-//                .collect(Collectors.toList());
-//        System.out.println(testList2);
-//        List<OrderDto> testList3 = orderList.stream()
-//                .filter(orderDto -> stateList.stream()
-//                        .filter(orderState -> orderState.getOrderId() == orderDto.getOrderId())
-//                        .anyMatch(orderState -> orderState.getOrderId() == orderDto.getOrderId()))
-//                .collect(Collectors.toList());
-//        stateList.stream()
-//                .flatMap(orderState -> orderStore.findAllOrderFromUserid(userid).stream().filter(orderStore -> orderState.getOrderId() == orderStore.getOrderId()))
-//                .collect(Collectors.toList());
     }
 
     @Test
     public void pleasPassPlease(){
-        //DB 컬럼 만들고 testid로 다 넣고 테스트해보기
         System.out.println(orderStore.findOrderStateListFromUserid("testid", OrderType.NORMAL));
         System.out.println(orderStore.findOrderStateListFromUserid("testid", OrderType.CANCEL));
         System.out.println(orderStore.findOrderStateListFromUserid("testid", OrderType.EXCHANGE));

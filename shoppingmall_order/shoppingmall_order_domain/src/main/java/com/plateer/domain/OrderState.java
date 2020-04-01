@@ -1,6 +1,10 @@
 package com.plateer.domain;
 
+import java.util.List;
+
 public interface OrderState {
+
+	List<StatusTypeEnum> getStatusTypes();
 
 	String getOrderId();
 	
