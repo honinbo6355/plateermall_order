@@ -87,7 +87,7 @@ public class OrderServiceImpl implements OrderService {
 
     private String getToday(){
         Date today = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return format.format(today);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(today);
     }
 }
