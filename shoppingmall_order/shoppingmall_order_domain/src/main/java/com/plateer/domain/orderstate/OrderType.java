@@ -1,7 +1,10 @@
 package com.plateer.domain.orderstate;
 
 public enum OrderType {
-    NORMAL("주문접수"), CANCEL("취소요청"), EXCHANGE("교환요청"), RETURN("반품요청");
+    NORMAL(NormalOrderState.StatusType.ORDER_COMPLETE.getStatus()),
+    CANCEL(CancelOrderState.StatusType.CANCEL_REQUEST.getStatus()),
+    EXCHANGE(ExchangeOrderState.StatusType.EXCHANGE_REQUEST.getStatus()),
+    RETURN(ReturnOrderState.StatusType.RETURN_REQUEST.getStatus());
 
     final private String defaultStatus;
 

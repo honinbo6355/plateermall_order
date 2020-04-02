@@ -16,6 +16,6 @@
         select * from ExchangeOrderState where userid = #{userId}
     </select>
     <select id="countOrderState" resultType="int">
-        select count(*) from ExchangeOrderState where orderState = #{state}
+        select count(*) from ExchangeOrderState where orderState = #{state} and userid = #{userid}
     </select>
 </mapper>

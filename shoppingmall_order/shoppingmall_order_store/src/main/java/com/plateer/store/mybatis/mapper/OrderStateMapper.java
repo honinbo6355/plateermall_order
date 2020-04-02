@@ -3,6 +3,7 @@ package com.plateer.store.mybatis.mapper;
 import com.plateer.domain.OrderState;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrderStateMapper {
 
@@ -14,6 +15,6 @@ public interface OrderStateMapper {
 
     List<OrderState> getOrderStateListFromUserid(String userid);
 
-    int countOrderState(String state);
+    int countOrderState(Map<String, String> params);
 
 }

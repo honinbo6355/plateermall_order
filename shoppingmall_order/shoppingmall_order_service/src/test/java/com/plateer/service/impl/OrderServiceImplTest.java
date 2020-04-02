@@ -30,6 +30,8 @@ public class OrderServiceImplTest {
 
     @Test
     public void test(){
+//        NormalOrderState nstate = new NormalOrderState();
+//        nstate.getStatusTypes().stream().forEach(statusTypeEnum -> System.out.println(statusTypeEnum.toString()));
         System.out.println(orderService.getOrderStateCount("testid", OrderType.CANCEL));
         System.out.println(orderService.getOrderStateCount("testid", OrderType.NORMAL));
         System.out.println(orderService.getOrderStateCount("testid", OrderType.RETURN));
@@ -38,7 +40,9 @@ public class OrderServiceImplTest {
 
     @Test
     public void createTestOrder(){
-//        OrderDto testDto = new OrderDto(" ", "nano124@gmail.com", "1203917702", 1, "19000", "2020-03-31", "250", null);
+        OrderDto testDto = new OrderDto(" ", "testid", "1203917702", 1, "19000", "2020-03-31", "250", null);
+//        orderService.createOrder(testDto);
+//        orderService.createOrder(testDto);
 //        orderService.createOrder(testDto);
     }
 

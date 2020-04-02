@@ -81,8 +81,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Map<String, Integer> getOrderStateCount(String userid, OrderType orderType) {
         OrderState state = orderStateMap.get(orderType).get();
-        return state.getStatusTypes().stream().map(stateTypeEnum -> stateTypeEnum.getStatus())
-                    .collect(Collectors.toMap(String::toString, stateType -> orderStore.getStateCountFromUserid(userid, stateType, orderType)));
+        return state.getStatusTypes().stream().collect(Collectors.toMap(statusTypeEnum -> statusTypeEnum.toString(),
+                    statusTypeEnum -> orderStore.getStateCountFromUserid(userid, statusTypeEnum.getStatus(), orderType)));
     }
 
     private String getToday(){

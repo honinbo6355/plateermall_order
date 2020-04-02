@@ -16,6 +16,6 @@
         select * from CancelOrderState where userid = #{userId}
     </select>
     <select id="countOrderState" resultType="int">
-        select count(*) from CancelOrderState where orderState = #{state}
+        select count(*) from CancelOrderState where orderState = #{state} and userid = #{userid}
     </select>
 </mapper>

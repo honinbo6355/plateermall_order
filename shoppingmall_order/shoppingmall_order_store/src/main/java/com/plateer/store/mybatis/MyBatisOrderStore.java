@@ -83,7 +83,10 @@ public class MyBatisOrderStore implements OrderStore {
 
     @Override
     public int getStateCountFromUserid(String userid, String state, OrderType typeEnum) {
-        return mapperMap.get(typeEnum).countOrderState(state);
+        HashMap<String, String> value = new HashMap<>();
+        value.put("state", state);
+        value.put("userid", userid);
+        return mapperMap.get(typeEnum).countOrderState(value);
     }
 
 

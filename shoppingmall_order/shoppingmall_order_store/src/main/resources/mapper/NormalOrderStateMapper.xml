@@ -17,6 +17,6 @@
     </select>
 
     <select id="countOrderState" resultType="int">
-        select count(*) from NormalOrderState where orderState = #{state}
+        select count(*) from NormalOrderState where orderState = #{state} and userid = #{userid}
     </select>
 </mapper>
