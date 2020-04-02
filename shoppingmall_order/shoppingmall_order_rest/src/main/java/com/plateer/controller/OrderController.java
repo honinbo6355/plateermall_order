@@ -32,8 +32,7 @@ public class OrderController {
 
 	@GetMapping("/list/{state}/{userid}")
 	public List<OrderDto> getOrderStateList(@PathVariable("state") String state, @PathVariable("userid") String userid){
-		OrderType requestOrderType = OrderType.valueOf(state.toUpperCase());
-		return orderService.findOrderListFromUserid(userid, requestOrderType);
+		return orderService.findOrderListFromUserid(userid, state);
 	}
 
 	@PostMapping("/order")
@@ -43,15 +42,17 @@ public class OrderController {
 
 	@GetMapping("/{original}/{changed}/{orderid}")
 	public boolean changeOrderState(@PathVariable("orderid") String orderid, @PathVariable("original") String original, @PathVariable String changed) {
-		OrderType originalType = OrderType.valueOf(original.toUpperCase());
-		OrderType changedType = OrderType.valueOf(changed.toUpperCase());
-		orderService.changeOrderState(orderid, originalType, changedType);
+		orderService.changeOrderState(orderid, original, changed);
 		return true;
 	}
 
 	@GetMapping("/count/{state}/{userid}")
-	public Map<String, Integer> getStateCount(@PathVariable String state, @PathVariable String userid){
-		OrderType orderType = OrderType.valueOf(state.toUpperCase());
-		return orderService.getOrderStateCount(userid, orderType);
+	public Map<String, Integer> getStateCountMap(@PathVariable String state, @PathVariable String userid){
+		return orderService.getOrderStateCount(userid, state);
+	}
+
+	@GetMapping("/specificstatelist/{state}/{specific}/{userid}")
+	public void getSpecificStateList(@PathVariable String state, @PathVariable String specific, @PathVariable String userid){
+
 	}
 }

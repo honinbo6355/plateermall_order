@@ -32,10 +32,12 @@ public class OrderServiceImplTest {
     public void test(){
 //        NormalOrderState nstate = new NormalOrderState();
 //        nstate.getStatusTypes().stream().forEach(statusTypeEnum -> System.out.println(statusTypeEnum.toString()));
-        System.out.println(orderService.getOrderStateCount("testid", OrderType.CANCEL));
-        System.out.println(orderService.getOrderStateCount("testid", OrderType.NORMAL));
-        System.out.println(orderService.getOrderStateCount("testid", OrderType.RETURN));
-        System.out.println(orderService.getOrderStateCount("testid", OrderType.EXCHANGE));
+//        System.out.println(orderService.findOrderListFromUserid("testid", "normal"));
+//        orderService.changeOrderState("202000034", "cancel", "normal");
+        System.out.println(orderService.getOrderStateCount("testid", "cancel"));
+        System.out.println(orderService.getOrderStateCount("testid", "normal"));
+        System.out.println(orderService.getOrderStateCount("testid", "return"));
+        System.out.println(orderService.getOrderStateCount("testid", "exchange"));
     }
 
     @Test

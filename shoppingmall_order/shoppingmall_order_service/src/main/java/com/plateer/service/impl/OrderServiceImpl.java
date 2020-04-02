@@ -42,9 +42,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> findOrderListFromUserid(String userid, OrderType typeEnum) {
+    public List<OrderDto> findOrderListFromUserid(String userid, String orderType) {
+        OrderType requestOrderType = OrderType.valueOf(orderType.toUpperCase());
         List<OrderDto> orderList = orderStore.findAllOrderFromUserid(userid);
-        List<OrderState> stateList = orderStore.findOrderStateListFromUserid(userid, typeEnum);
+        List<OrderState> stateList = orderStore.findOrderStateListFromUserid(userid, requestOrderType);
         return stateList.stream()
                 .flatMap(orderState -> orderList.stream()
                         .filter(orderDto -> orderDto.getOrderId().equals(orderState.getOrderId()))
@@ -66,7 +67,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean changeOrderState(String orderid, OrderType originalType, OrderType changedType) {
+    public boolean changeOrderState(String orderid, String original, String changed) {
+        OrderType originalType = OrderType.valueOf(original.toUpperCase());
+        OrderType changedType = OrderType.valueOf(changed.toUpperCase());
         OrderState orderState = orderStore.retriveOrderStateFromOrderid(orderid, originalType);
         OrderState changedState = orderStateMap.get(changedType).get();
         changedState.setOrderId(orderState.getOrderId());
@@ -79,10 +82,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Map<String, Integer> getOrderStateCount(String userid, OrderType orderType) {
-        OrderState state = orderStateMap.get(orderType).get();
+    public Map<String, Integer> getOrderStateCount(String userid, String type) {
+        OrderType requestOrderType = OrderType.valueOf(type.toUpperCase());
+        OrderState state = orderStateMap.get(requestOrderType).get();
         return state.getStatusTypes().stream().collect(Collectors.toMap(statusTypeEnum -> statusTypeEnum.toString(),
-                    statusTypeEnum -> orderStore.getStateCountFromUserid(userid, statusTypeEnum.getStatus(), orderType)));
+                    statusTypeEnum -> orderStore.getStateCountFromUserid(userid, statusTypeEnum.getStatus(), requestOrderType)));
     }
 
     private String getToday(){
