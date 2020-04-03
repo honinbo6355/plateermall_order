@@ -15,6 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = OrderServiceTestApplication.class)
@@ -43,18 +45,19 @@ public class OrderServiceImplTest {
     @Test
     public void createTestOrder(){
         OrderDto testDto = new OrderDto(" ", "testid", "1203917702", 1, "19000", "2020-03-31", "250", null);
+        orderService.createOrder(testDto);
 //        orderService.createOrder(testDto);
 //        orderService.createOrder(testDto);
-//        orderService.createOrder(testDto);
+        String test = "payment-complete";
+        System.out.println(test.toUpperCase().replaceAll("-", "_"));
     }
 
     @Test
     public void changeTest(){
-//        orderService.changeOrderState("202000002", OrderType.CANCEL, OrderType.CANCEL);
-//        orderService.changeOrderState("202000008", OrderType.CANCEL, OrderType.CANCEL);
-//        orderService.changeOrderState("202000009", OrderType.CANCEL, OrderType.CANCEL);
-//        orderService.changeOrderState("202000010", OrderType.CANCEL, OrderType.CANCEL);
-//        orderService.changeOrderState("202000011", OrderType.CANCEL, OrderType.CANCEL);
+        Stream.iterate(new int[]{0, 1}, array -> new int[]{array[1], array[0] + array[1]})
+                .limit(20)
+                .map(array -> array[0])
+                .forEach(System.out::println);
     }
 
     @Test
@@ -65,5 +68,20 @@ public class OrderServiceImplTest {
         List<StatusTypeEnum> list = Arrays.asList(NormalOrderState.StatusType.values());
         list.stream().forEach(statusTypeEnum -> System.out.println(statusTypeEnum.getStatus()));
         System.out.println(list);
+    }
+
+    @Test
+    public void getOrderStateCountTest(){
+        System.out.println(orderService.getOrderStateCount("testid", "cancel"));
+    }
+
+    @Test
+    public void getSpecificStateOrderListTest(){
+        orderService.getSpecificStateOrderList("normal", "order-complete", "testid").stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void findOrderListFromUseridTest(){
+        orderService.findOrderListFromUserid("testid", "cancel").stream().forEach(System.out::println);
     }
 }

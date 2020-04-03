@@ -6,13 +6,16 @@ import com.plateer.domain.StatusTypeEnum;
 import com.plateer.domain.orderstate.*;
 import com.plateer.service.OrderService;
 import com.plateer.store.mybatis.MyBatisOrderStore;
+import com.plateer.store.mybatis.mapper.OrderStateMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.*;
 
 @Service
 @Transactional
@@ -43,18 +46,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> findOrderListFromUserid(String userid, String orderType) {
+
         OrderType requestOrderType = OrderType.valueOf(orderType.toUpperCase());
-        List<OrderDto> orderList = orderStore.findAllOrderFromUserid(userid);
         List<OrderState> stateList = orderStore.findOrderStateListFromUserid(userid, requestOrderType);
-        return stateList.stream()
-                .flatMap(orderState -> orderList.stream()
-                        .filter(orderDto -> orderDto.getOrderId().equals(orderState.getOrderId()))
-                        .map(orderDto -> {
-                            orderDto.setOrderState(orderState);
-                            return orderDto;
-                        }))
-                .sorted(Comparator.comparing(OrderDto::getOrderId).reversed())
-                .collect(Collectors.toList());
+        return getOrderDtoListFromOrderStateList(stateList);
     }
 
     @Override
@@ -85,13 +80,47 @@ public class OrderServiceImpl implements OrderService {
     public Map<String, Integer> getOrderStateCount(String userid, String type) {
         OrderType requestOrderType = OrderType.valueOf(type.toUpperCase());
         OrderState state = orderStateMap.get(requestOrderType).get();
-        return state.getStatusTypes().stream().collect(Collectors.toMap(statusTypeEnum -> statusTypeEnum.toString(),
+
+        //이거 없으면 안나오는거 해결하는거 책에 있었는데 뭐였더라?
+//        return orderStore.findOrderStateListFromUserid(userid, requestOrderType).stream()
+//                .collect(groupingBy(OrderState::getOrderState, counting()));
+
+        return state.getStatusTypes().stream().collect(toMap(statusTypeEnum -> statusTypeEnum.toString(),
                     statusTypeEnum -> orderStore.getStateCountFromUserid(userid, statusTypeEnum.getStatus(), requestOrderType)));
+    }
+
+    @Override
+    public List<OrderDto> getSpecificStateOrderList(String state, String specific, String userid) {
+        OrderType requestOrderType = OrderType.valueOf(state.toUpperCase());
+        OrderState requestState = orderStateMap.get(requestOrderType).get();
+        String parsedSpecific = specific.toUpperCase().replaceAll("-", "_");
+
+        List<OrderState> specificOrderStateList = requestState.getStatusTypes().stream()
+                .filter(statusTypeEnum -> statusTypeEnum.toString().equals(parsedSpecific))
+                .flatMap(statusTypeEnum -> orderStore.findSpecificOrderStateListFromUserid(userid, statusTypeEnum.getStatus(), requestOrderType).stream())
+                .collect(toList());
+
+        return getOrderDtoListFromOrderStateList(specificOrderStateList);
     }
 
     private String getToday(){
         Date today = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(today);
+    }
+
+    private List<OrderDto> getOrderDtoListFromOrderStateList(List<OrderState> orderStateList){
+        String userid = orderStateList.get(0).getUserId();
+        List<OrderDto> orderList = orderStore.findAllOrderFromUserid(userid);
+        return orderStateList.stream()
+                .flatMap(
+                        orderState -> orderList.stream()
+                                .filter(orderDto -> orderDto.getOrderId().equals(orderState.getOrderId()))
+                                .map(orderDto -> {
+                                    orderDto.setOrderState(orderState);
+                                    return orderDto;
+                                })
+                ).sorted(Comparator.comparing(OrderDto::getOrderId).reversed())
+                .collect(toList());
     }
 }

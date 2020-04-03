@@ -26,5 +26,6 @@ public interface OrderStore {
 
     int getStateCountFromUserid(String userid, String state, OrderType typeEnum);
 
+    List<OrderState> findSpecificOrderStateListFromUserid(String userid, String state, OrderType typeEnum);
     //String userid, String state, OrderType typeEnum
 }
