@@ -42,7 +42,10 @@ public class MyBatisOrderStoreTest {
 
     @Test
     public void retrieveOne(){
-
+        System.out.println(orderStore.findSpecificOrderStateListFromUserid("testid", "주문접수", OrderType.NORMAL));
+        System.out.println(orderStore.findSpecificOrderStateListFromUserid("testid", "취소요청", OrderType.CANCEL));
+        System.out.println(orderStore.findSpecificOrderStateListFromUserid("testid", "반품요청", OrderType.RETURN));
+        System.out.println(orderStore.findSpecificOrderStateListFromUserid("testid", "교환요청", OrderType.EXCHANGE));
     }
 
     @Test

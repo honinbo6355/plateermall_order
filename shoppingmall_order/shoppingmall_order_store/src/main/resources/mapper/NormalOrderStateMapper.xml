@@ -19,4 +19,8 @@
     <select id="countOrderState" resultType="int">
         select count(*) from NormalOrderState where orderState = #{state} and userid = #{userid}
     </select>
+
+    <select id="getSpecificOrderStateList" resultType="NormalOrderState">
+        select * from NormalOrderState where orderState = #{state} and userid = #{userid}
+    </select>
 </mapper>

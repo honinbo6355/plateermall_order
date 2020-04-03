@@ -17,4 +17,5 @@ public interface OrderStateMapper {
 
     int countOrderState(Map<String, String> params);
 
+    List<OrderState> getSpecificOrderStateList(Map<String, String> params);
 }

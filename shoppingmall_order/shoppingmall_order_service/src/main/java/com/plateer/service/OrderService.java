@@ -19,4 +19,5 @@ public interface OrderService {
 
     Map<String, Integer> getOrderStateCount(String userid, String type);
 
+    List<OrderDto> getSpecificStateOrderList(String state, String specific, String userid);
 }
