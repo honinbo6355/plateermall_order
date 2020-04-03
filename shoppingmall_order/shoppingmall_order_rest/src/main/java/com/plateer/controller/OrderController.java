@@ -52,7 +52,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/specificstatelist/{state}/{specific}/{userid}")
-	public void getSpecificStateList(@PathVariable String state, @PathVariable String specific, @PathVariable String userid){
-
+	public List<OrderDto> getSpecificStateList(@PathVariable String state, @PathVariable String specific, @PathVariable String userid){
+		return orderService.getSpecificStateOrderList(state, specific, userid);
 	}
 }
