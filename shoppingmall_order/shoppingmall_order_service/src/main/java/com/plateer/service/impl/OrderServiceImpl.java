@@ -93,10 +93,10 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDto> getSpecificStateOrderList(String state, String specific, String userid) {
         OrderType requestOrderType = OrderType.valueOf(state.toUpperCase());
         OrderState requestState = orderStateMap.get(requestOrderType).get();
-        String parsedSpecific = specific.toUpperCase().replaceAll("-", "_");
+        String parsedSpecificStatus = specific.toUpperCase().replaceAll("-", "_");
 
         List<OrderState> specificOrderStateList = requestState.getStatusTypes().stream()
-                .filter(statusTypeEnum -> statusTypeEnum.toString().equals(parsedSpecific))
+                .filter(statusTypeEnum -> statusTypeEnum.toString().equals(parsedSpecificStatus))
                 .flatMap(statusTypeEnum -> orderStore.findSpecificOrderStateListFromUserid(userid, statusTypeEnum.getStatus(), requestOrderType).stream())
                 .collect(toList());
 

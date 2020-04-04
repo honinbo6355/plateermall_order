@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Repository
 public class MyBatisOrderStore implements OrderStore {
@@ -48,12 +47,12 @@ public class MyBatisOrderStore implements OrderStore {
         return orderStoreMapper.retriveOne(orderid);
     }
 
-    @Override
+    @Override //
     public OrderState retriveOrderStateFromOrderid(String orderid, OrderType typeEnum) {
         return mapperMap.get(typeEnum).getOrderStateFromOrderid(orderid);
     }
 
-    @Override
+    @Override //
     public void createOrder(OrderDto orderDto, OrderState orderState) {
         orderStoreMapper.createNewOrder(orderDto);
         mapperMap.get(OrderType.NORMAL).createNewOrderState(orderState);
@@ -64,13 +63,13 @@ public class MyBatisOrderStore implements OrderStore {
         return orderStoreMapper.getNewOrderId();
     }
 
-    @Override
+    @Override //
     public boolean createOrderState(OrderState orderState, OrderType typeEnum) {
         mapperMap.get(typeEnum).createNewOrderState(orderState);
         return true;
     }
 
-    @Override
+    @Override //
     public boolean deleteOrderState(String orderid, OrderType typeEnum) {
         mapperMap.get(typeEnum).deleteOrderState(orderid);
         return true;
@@ -81,7 +80,7 @@ public class MyBatisOrderStore implements OrderStore {
         return mapperMap.get(typeEnum).getOrderStateListFromUserid(userid);
     }
 
-    @Override
+    @Override //
     public int getStateCountFromUserid(String userid, String state, OrderType typeEnum) {
         HashMap<String, String> params = new HashMap<>();
         params.put("state", state);
@@ -89,7 +88,7 @@ public class MyBatisOrderStore implements OrderStore {
         return mapperMap.get(typeEnum).countOrderState(params);
     }
 
-    @Override
+    @Override //
     public List<OrderState> findSpecificOrderStateListFromUserid(String userid, String state, OrderType typeEnum) {
         HashMap<String, String> params = new HashMap<>();
         params.put("state", state);
