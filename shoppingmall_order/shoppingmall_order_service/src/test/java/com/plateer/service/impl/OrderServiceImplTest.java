@@ -26,12 +26,12 @@ public class OrderServiceImplTest {
         System.out.println(orderService.getOrderStateCount("testid", "exchange"));
     }
 
-    @Test
-    public void findAllOrderFromUserIdTest(){
-
-        String userid = "testid";
-        orderService.findAllOrderFromUserId(userid).stream().forEach(System.out::println);
-    }
+//    @Test
+//    public void findAllOrderFromUserIdTest(){
+//
+//        String userid = "testid";
+//        orderService.findAllOrderFromUserId(userid).stream().forEach(System.out::println);
+//    }
 
     @Test
     public void findOrderFromOrderIdTest(){
@@ -49,7 +49,7 @@ public class OrderServiceImplTest {
     @Test
     public void createOrderTest(){
         OrderDto testDto = new OrderDto(" ", "testid", "1203917702", 1, "19000", "2020-03-31", "250", null);
-        //실제 데이터 생성이므로 주의
+//        실제 데이터 생성이므로 주의
 //        orderService.createOrder(testDto);
 //        orderService.createOrder(testDto);
 //        orderService.createOrder(testDto);
@@ -66,12 +66,13 @@ public class OrderServiceImplTest {
 
     @Test
     public void getOrderStateCountTest(){
+
         System.out.println(orderService.getOrderStateCount("testid", "cancel"));
     }
 
     @Test
-    public void getSpecificStateOrderListTest(){
-        orderService.getSpecificStateOrderList("normal", "order-complete", "testid").stream().forEach(System.out::println);
+    public void getSpecificStatusOrderListTest(){
+        orderService.getSpecificStatusOrderList("normal", "order-complete", "testid").stream().forEach(System.out::println);
     }
 
 }
