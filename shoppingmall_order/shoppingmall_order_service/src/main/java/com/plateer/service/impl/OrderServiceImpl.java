@@ -2,7 +2,7 @@ package com.plateer.service.impl;
 
 import com.plateer.domain.OrderDto;
 import com.plateer.domain.OrderState;
-import com.plateer.domain.StatusTypeEnum;
+import com.plateer.domain.orderstate.StatusTypeEnum;
 import com.plateer.domain.orderstate.*;
 import com.plateer.service.OrderService;
 import com.plateer.store.mybatis.MyBatisOrderStateStore;
@@ -112,7 +112,6 @@ public class OrderServiceImpl implements OrderService {
 
         String userid = orderStateList.get(0).getUserId();
         List<OrderDto> orderList = orderStore.findAllOrderFromUserid(userid);
-
         List<OrderDto> completeOrderDtoList = orderStateList.stream()
                 .flatMap(orderState -> orderList.stream()
                         .filter(orderDto -> orderDto.getOrderId().equals(orderState.getOrderId()))

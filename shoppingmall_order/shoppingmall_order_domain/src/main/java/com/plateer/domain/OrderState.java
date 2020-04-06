@@ -1,5 +1,7 @@
 package com.plateer.domain;
 
+import com.plateer.domain.orderstate.StatusTypeEnum;
+
 import java.util.List;
 
 public interface OrderState {

@@ -2,10 +2,8 @@ package com.plateer.domain.orderstate;
 
 import com.plateer.domain.OrderState;
 
-import com.plateer.domain.StatusTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Arrays;
