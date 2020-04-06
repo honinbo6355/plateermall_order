@@ -7,8 +7,6 @@ import java.util.Map;
 
 public interface OrderService {
 
-    List<OrderDto> findAllOrderFromUserId(String userid);
-
     OrderDto findOrderFromOrderId(String orderid);
 
     List<OrderDto> findOrderListFromUserid(String userid, String orderType);
@@ -19,5 +17,5 @@ public interface OrderService {
 
     Map<String, Integer> getOrderStateCount(String userid, String type);
 
-    List<OrderDto> getSpecificStateOrderList(String state, String specific, String userid);
+    List<OrderDto> getSpecificStatusOrderList(String state, String specific, String userid);
 }

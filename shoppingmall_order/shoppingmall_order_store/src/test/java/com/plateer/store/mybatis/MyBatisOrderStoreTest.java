@@ -26,53 +26,6 @@ public class MyBatisOrderStoreTest {
 
     @Autowired
     MyBatisOrderStore orderStore;
-    OrderDto testOrderDto;
 
-    @Before
-    public void before(){
-        OrderState testOrderState = new CancelOrderState("202000001", "2020-03-26", "취소요청", "testid");
-        this.testOrderDto = new OrderDto("202000001", "testid", "1203917700",1 ,"35000", "2020-03-25","사이즈 : 235", null);
-    }
 
-    @Test
-    public void findAllTest(){
-        //폼에서 h2 빼보기 상관없음
-//        Assert.assertEquals(6, orderStore.findAllOrderFromUserid("testid").size());
-    }
-
-    @Test
-    public void retrieveOne(){
-        System.out.println(orderStore.findSpecificOrderStateListFromUserid("testid", "주문접수", OrderType.NORMAL));
-        System.out.println(orderStore.findSpecificOrderStateListFromUserid("testid", "취소요청", OrderType.CANCEL));
-        System.out.println(orderStore.findSpecificOrderStateListFromUserid("testid", "반품요청", OrderType.RETURN));
-        System.out.println(orderStore.findSpecificOrderStateListFromUserid("testid", "교환요청", OrderType.EXCHANGE));
-    }
-
-    @Test
-    public void retriveOrderFromMapTest(){
-        Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(format.format(date));
-    }
-
-    @Test
-    public void orderStateCountTest(){
-        NormalOrderState normalOrderState = new NormalOrderState();
-        CancelOrderState cancelOrderState = new CancelOrderState();
-        ExchangeOrderState exchangeOrderState = new ExchangeOrderState();
-        ReturnOrderState returnOrderState = new ReturnOrderState();
-        List<String> normalTypeStrings = normalOrderState.getStatusTypes().stream().map(statusTypeEnum -> statusTypeEnum.getStatus()).collect(Collectors.toList());
-        List<String> cancelTypeStrings = cancelOrderState.getStatusTypes().stream().map(statusTypeEnum -> statusTypeEnum.getStatus()).collect(Collectors.toList());
-        List<String> exchangeTypeStrings = exchangeOrderState.getStatusTypes().stream().map(statusTypeEnum -> statusTypeEnum.getStatus()).collect(Collectors.toList());
-        List<String> returnTypeStrings = returnOrderState.getStatusTypes().stream().map(statusTypeEnum -> statusTypeEnum.getStatus()).collect(Collectors.toList());
-
-    }
-
-    @Test
-    public void pleasPassPlease(){
-        System.out.println(orderStore.findOrderStateListFromUserid("testid", OrderType.NORMAL));
-        System.out.println(orderStore.findOrderStateListFromUserid("testid", OrderType.CANCEL));
-        System.out.println(orderStore.findOrderStateListFromUserid("testid", OrderType.EXCHANGE));
-        System.out.println(orderStore.findOrderStateListFromUserid("testid", OrderType.RETURN));
-    }
 }
