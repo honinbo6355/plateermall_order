@@ -2,7 +2,7 @@ package com.plateer.service.impl;
 
 import com.plateer.domain.OrderDto;
 import com.plateer.domain.OrderState;
-import com.plateer.domain.StatusTypeEnum;
+import com.plateer.domain.orderstate.StatusTypeEnum;
 import com.plateer.domain.orderstate.*;
 import com.plateer.service.OrderService;
 import com.plateer.store.mybatis.MyBatisOrderStateStore;
