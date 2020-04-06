@@ -35,7 +35,7 @@ public class OrderServiceImplTest {
     @Test
     public void findOrderListFromUseridTest(){
 
-        orderService.findOrderListFromUserid("testid", "cancel").stream().forEach(System.out::println);
+        orderService.findOrderListFromUserid("testid", "normal").stream().forEach(System.out::println);
     }
 
     @Test
@@ -59,12 +59,12 @@ public class OrderServiceImplTest {
     @Test
     public void getOrderStateCountTest(){
 
-        System.out.println(orderService.getOrderStateCount("testid", "cancel"));
+        System.out.println(orderService.getOrderStateCount("testid", "normal"));
     }
 
     @Test
     public void getSpecificStatusOrderListTest(){
-        System.out.println(orderService.getSpecificStatusOrderList("return", "return-request", "testid"));
+        System.out.println(orderService.getSpecificStatusOrderList("cancel", "cancel-request", "testid"));
     }
 
 }
