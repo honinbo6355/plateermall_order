@@ -112,7 +112,6 @@ public class OrderServiceImpl implements OrderService {
 
         String userid = orderStateList.get(0).getUserId();
         List<OrderDto> orderList = orderStore.findAllOrderFromUserid(userid);
-
         List<OrderDto> completeOrderDtoList = orderStateList.stream()
                 .flatMap(orderState -> orderList.stream()
                         .filter(orderDto -> orderDto.getOrderId().equals(orderState.getOrderId()))
