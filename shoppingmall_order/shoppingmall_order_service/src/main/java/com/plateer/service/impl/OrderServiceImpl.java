@@ -29,6 +29,9 @@ public class OrderServiceImpl implements OrderService {
         this.orderStateStore = orderStateStore;
     }
 
+    /*
+    OrderState가 null인 불완전한 OrderDto를 반환한다.
+     */
     @Override
     public OrderDto findOrderFromOrderId(String orderid) {
 
