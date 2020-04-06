@@ -21,7 +21,7 @@ public class NormalOrderState implements OrderState{
 	private String userId;
 
 	public enum StatusType implements StatusTypeEnum {
-		ORDER_COMPLETE("주문접수"), PAYMENT_COMPLETE("결제완료"), SHIPPING_READY("배송준비중") ,SHIPPING("배송중"), SHIPPING_COMPLETE("배송완료");
+		ORDER_COMPLETE("주문접수"), PAYMENT_COMPLETE("결제완료"), SHIPPING_READY("배송준비중"), SHIPPING("배송중"), SHIPPING_COMPLETE("배송완료");
 
 		final private String status;
 

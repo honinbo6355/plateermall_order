@@ -7,12 +7,12 @@ import com.plateer.domain.orderstate.*;
 import com.plateer.service.OrderService;
 import com.plateer.store.mybatis.MyBatisOrderStateStore;
 import com.plateer.store.mybatis.MyBatisOrderStore;
+import com.plateer.util.OrderStateFactory;
+import com.plateer.util.OrderUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.Supplier;
 
 import static java.util.stream.Collectors.*;
 
@@ -22,22 +22,16 @@ public class OrderServiceImpl implements OrderService {
 
     private MyBatisOrderStore orderStore;
     private MyBatisOrderStateStore orderStateStore;
-    private Map<OrderType, Supplier<OrderState>> orderStateMap;
 
-    /*
-    동적으로 OrderState를 구현한 구현체를 생성하기 위해 orderStateMap에 생성자를 넣어둔다.
-     */
     public OrderServiceImpl(MyBatisOrderStore orderStore, MyBatisOrderStateStore orderStateStore) {
 
         this.orderStore = orderStore;
         this.orderStateStore = orderStateStore;
-        this.orderStateMap = new HashMap<>();
-        this.orderStateMap.put(OrderType.NORMAL, NormalOrderState::new);
-        this.orderStateMap.put(OrderType.CANCEL, CancelOrderState::new);
-        this.orderStateMap.put(OrderType.EXCHANGE, ExchangeOrderState::new);
-        this.orderStateMap.put(OrderType.RETURN, ReturnOrderState::new);
     }
 
+    /*
+    OrderState가 null인 불완전한 OrderDto를 반환한다.
+     */
     @Override
     public OrderDto findOrderFromOrderId(String orderid) {
 
@@ -47,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> findOrderListFromUserid(String userid, String orderType) {
 
-        OrderType requestOrderType = getOrderTypeByString(orderType);
+        OrderType requestOrderType = OrderUtil.getOrderTypeByString(orderType);
         List<OrderState> stateList = orderStateStore.findOrderStateListFromUserid(userid, requestOrderType);
         List<OrderDto> completeOrderDto = getCompleteOrderDtoListFromOrderStateList(stateList);
 
@@ -72,14 +66,14 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean changeOrderState(String orderid, String originalOrderType, String changedOrderType) {
 
-        OrderType originalType = getOrderTypeByString(originalOrderType);
+        OrderType originalType = OrderUtil.getOrderTypeByString(originalOrderType);
         OrderState originalOrderState = orderStateStore.retriveOrderStateFromOrderid(orderid, originalType);
         orderStateStore.deleteOrderState(orderid, originalType);
-        OrderType changedType = getOrderTypeByString(changedOrderType);
-        OrderState changedState = getNewOrderStateInstance(changedType);
+        OrderType changedType = OrderUtil.getOrderTypeByString(changedOrderType);
+        OrderState changedState = OrderStateFactory.getNewOrderStateInstance(changedType);
         changedState.setOrderId(originalOrderState.getOrderId());
         changedState.setOrderState(changedType.getDefaultStatus());
-        changedState.setStateChangeDate(getToday());
+        changedState.setStateChangeDate(OrderUtil.getToday());
         changedState.setUserId(originalOrderState.getUserId());
         orderStateStore.createOrderState(changedState, changedType);
 
@@ -89,7 +83,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Map<String, Integer> getOrderStateCount(String userid, String orderType) {
 
-        OrderType requestOrderType = getOrderTypeByString(orderType);
+        OrderType requestOrderType = OrderUtil.getOrderTypeByString(orderType);
         Map<String, Integer> userOrderStatusCountMap = getUserOrderStatusCountMap(userid, requestOrderType);
 
         return userOrderStatusCountMap;
@@ -98,8 +92,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> getSpecificStatusOrderList(String orderType, String specific, String userid) {
 
-        OrderType requestOrderType = getOrderTypeByString(orderType);
-        String parsedSpecificStatus = parsingStatusUrlPatternToEnumPattern(specific);
+        OrderType requestOrderType = OrderUtil.getOrderTypeByString(orderType);
+        String parsedSpecificStatus = OrderUtil.parsingStatusUrlPatternToEnumPattern(specific);
         List<OrderState> specificOrderStateList = getSpecificOrderStateList(userid, parsedSpecificStatus, requestOrderType);
         System.out.println(specificOrderStateList);
         List<OrderDto> completeOrderDtoList = getCompleteOrderDtoListFromOrderStateList(specificOrderStateList);
@@ -138,7 +132,7 @@ public class OrderServiceImpl implements OrderService {
      */
     private List<OrderState> getSpecificOrderStateList(String userid, String parsedSpecificStatus, OrderType requestOrderType) {
 
-        OrderState requestState = getNewOrderStateInstance(requestOrderType);
+        OrderState requestState = OrderStateFactory.getNewOrderStateInstance(requestOrderType);
         List<StatusTypeEnum> statusTypeEnumList = requestState.getStatusTypes();
         List<OrderState> specificOrderStateList = statusTypeEnumList.stream()
                 .filter(statusTypeEnum -> statusTypeEnum.toString().equals(parsedSpecificStatus))
@@ -155,45 +149,12 @@ public class OrderServiceImpl implements OrderService {
      */
     private Map<String, Integer> getUserOrderStatusCountMap(String userid, OrderType requestOrderType) {
 
-        OrderState requestOrderState = getNewOrderStateInstance(requestOrderType);
+        OrderState requestOrderState = OrderStateFactory.getNewOrderStateInstance(requestOrderType);
         List<StatusTypeEnum> statusTypeEnumList = requestOrderState.getStatusTypes();
         Map<String, Integer> userOrderStatusCount = statusTypeEnumList.stream().collect(toMap(
                 statusTypeEnum -> statusTypeEnum.toString(),
                 statusTypeEnum -> orderStateStore.getStateCountFromUserid(userid, statusTypeEnum.getStatus(), requestOrderType)));
 
         return userOrderStatusCount;
-    }
-
-    /*
-    소문자의 문자열을 받아 해당하는 대문자 값을 가진 OrderType enum을 반환한다.
-     */
-    private OrderType getOrderTypeByString(String lowerCaseOrderType) {
-
-        OrderType orderType = OrderType.valueOf(lowerCaseOrderType.toUpperCase());
-
-        return orderType;
-    }
-
-    private OrderState getNewOrderStateInstance(OrderType orderType) {
-
-        OrderState newOrderStateInstance = orderStateMap.get(orderType).get();
-
-        return newOrderStateInstance;
-    }
-
-    /*
-    url 패턴의 문자열을 enum 패턴으로 변환한다. ex) order-complete -> ORDER_COMPLETE
-     */
-    private String parsingStatusUrlPatternToEnumPattern(String urlPattern) {
-
-        return urlPattern.toUpperCase().replaceAll("-", "_");
-    }
-
-    private String getToday() {
-
-        Date today = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        return dateFormat.format(today);
     }
 }
