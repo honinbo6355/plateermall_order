@@ -59,7 +59,7 @@ public class OrderServiceImplTest {
     @Test
     public void getOrderStateCountTest(){
 
-        System.out.println(orderService.getOrderStateCount("testid", "normal"));
+        System.out.println(orderService.getOrderStateCount("testid", "cancel"));
     }
 
     @Test
