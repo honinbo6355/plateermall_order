@@ -24,6 +24,9 @@ public class OrderServiceImpl implements OrderService {
     private MyBatisOrderStateStore orderStateStore;
     private Map<OrderType, Supplier<OrderState>> orderStateMap;
 
+    /*
+    동적으로 OrderState를 구현한 구현체를 생성하기 위해 orderStateMap에 생성자를 넣어둔다.
+     */
     public OrderServiceImpl(MyBatisOrderStore orderStore, MyBatisOrderStateStore orderStateStore) {
 
         this.orderStore = orderStore;
@@ -57,7 +60,6 @@ public class OrderServiceImpl implements OrderService {
         int newOrderId = orderStore.getNewOrderid();
         orderDto.setOrderId(Integer.toString(newOrderId));
         orderStore.createOrder(orderDto);
-
         OrderState normalOrderState = new NormalOrderState(orderDto.getOrderId(), orderDto.getOrderDate(), OrderType.NORMAL.getDefaultStatus(), orderDto.getUserId());
         orderStateStore.createOrderState(normalOrderState, OrderType.NORMAL);
 
@@ -73,7 +75,6 @@ public class OrderServiceImpl implements OrderService {
         OrderType originalType = getOrderTypeByString(originalOrderType);
         OrderState originalOrderState = orderStateStore.retriveOrderStateFromOrderid(orderid, originalType);
         orderStateStore.deleteOrderState(orderid, originalType);
-
         OrderType changedType = getOrderTypeByString(changedOrderType);
         OrderState changedState = getNewOrderStateInstance(changedType);
         changedState.setOrderId(originalOrderState.getOrderId());
@@ -100,6 +101,7 @@ public class OrderServiceImpl implements OrderService {
         OrderType requestOrderType = getOrderTypeByString(orderType);
         String parsedSpecificStatus = parsingStatusUrlPatternToEnumPattern(specific);
         List<OrderState> specificOrderStateList = getSpecificOrderStateList(userid, parsedSpecificStatus, requestOrderType);
+        System.out.println(specificOrderStateList);
         List<OrderDto> completeOrderDtoList = getCompleteOrderDtoListFromOrderStateList(specificOrderStateList);
 
         return completeOrderDtoList;
@@ -111,6 +113,8 @@ public class OrderServiceImpl implements OrderService {
     같은 userid를 가지고 있는 stateList를 인자로 주어야 정상적으로 작동한다.
      */
     private List<OrderDto> getCompleteOrderDtoListFromOrderStateList(List<OrderState> orderStateList) {
+
+        if (orderStateList.isEmpty()) return Collections.EMPTY_LIST;
 
         String userid = orderStateList.get(0).getUserId();
         List<OrderDto> orderList = orderStore.findAllOrderFromUserid(userid);
@@ -137,7 +141,7 @@ public class OrderServiceImpl implements OrderService {
         OrderState requestState = getNewOrderStateInstance(requestOrderType);
         List<StatusTypeEnum> statusTypeEnumList = requestState.getStatusTypes();
         List<OrderState> specificOrderStateList = statusTypeEnumList.stream()
-                .filter(statusTypeEnum -> statusTypeEnum.getStatus().equals(parsedSpecificStatus))
+                .filter(statusTypeEnum -> statusTypeEnum.toString().equals(parsedSpecificStatus))
                 .flatMap(statusTypeEnum -> orderStateStore.findSpecificOrderStateListFromUserid(userid, statusTypeEnum.getStatus(), requestOrderType).stream())
                 .sorted(Comparator.comparing(OrderState::getOrderId).reversed())
                 .collect(toList());

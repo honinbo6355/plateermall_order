@@ -2,7 +2,6 @@ package com.plateer.service.impl;
 
 import com.plateer.OrderServiceTestApplication;
 import com.plateer.domain.OrderDto;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +25,10 @@ public class OrderServiceImplTest {
         System.out.println(orderService.getOrderStateCount("testid", "exchange"));
     }
 
-//    @Test
-//    public void findAllOrderFromUserIdTest(){
-//
-//        String userid = "testid";
-//        orderService.findAllOrderFromUserId(userid).stream().forEach(System.out::println);
-//    }
-
     @Test
     public void findOrderFromOrderIdTest(){
 
-        String orderid = "";
+        String orderid = "202000001";
         System.out.println(orderService.findOrderFromOrderId(orderid));
     }
 
@@ -48,7 +40,7 @@ public class OrderServiceImplTest {
 
     @Test
     public void createOrderTest(){
-        OrderDto testDto = new OrderDto(" ", "testid", "1203917702", 1, "19000", "2020-03-31", "250", null);
+        OrderDto testDto = new OrderDto(" ", "testid", "1203917702", 1, "19000", "2020-04-06", "250", null);
 //        실제 데이터 생성이므로 주의
 //        orderService.createOrder(testDto);
 //        orderService.createOrder(testDto);
@@ -57,10 +49,10 @@ public class OrderServiceImplTest {
 
     @Test
     public void changeOrderStateTest(){
-        String orderid = "";
-        String originalType = null;
-        String changedType = null;
-        //실제 데이터 조작 주의
+        String orderid = "202000045";
+        String originalType = "normal";
+        String changedType = "cancel";
+//        실제 데이터 조작 주의
 //        orderService.changeOrderState(orderid, originalType, changedType);
     }
 
@@ -72,7 +64,7 @@ public class OrderServiceImplTest {
 
     @Test
     public void getSpecificStatusOrderListTest(){
-        orderService.getSpecificStatusOrderList("normal", "order-complete", "testid").stream().forEach(System.out::println);
+        System.out.println(orderService.getSpecificStatusOrderList("return", "return-request", "testid"));
     }
 
 }
