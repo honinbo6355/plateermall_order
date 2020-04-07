@@ -1,4 +1,4 @@
-package com.plateer.store.mybatis.mapper;
+package com.plateer.store.mybatis.mapper.state;
 
 
 public interface ExchangeOrderStateMapper extends OrderStateMapper{

@@ -17,5 +17,5 @@ public class OrderPaymentInfo {
 
     private OrderOriginalPrice orderOriginalPrice;
     private List<OrderDiscountPrice> orderDiscountPriceList;
-    private OrderCardPaymentInfo orderCardPaymentInfo;
+    private OrderCardPayment orderCardPayment;
 }

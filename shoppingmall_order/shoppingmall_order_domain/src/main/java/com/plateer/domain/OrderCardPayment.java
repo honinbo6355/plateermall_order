@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @Getter
 @Setter
-public class OrderCardPaymentInfo {
+public class OrderCardPayment {
 
     private String orderId;
     private String cardName;
