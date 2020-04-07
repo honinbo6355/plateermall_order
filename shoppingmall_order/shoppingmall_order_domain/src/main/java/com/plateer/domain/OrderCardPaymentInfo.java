@@ -11,6 +11,6 @@ public class OrderCardPaymentInfo {
 
     private String orderId;
     private String cardName;
-    private int installments;
+    private String installments;
 
 }

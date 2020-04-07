@@ -40,7 +40,7 @@ public class OrderServiceImplTest {
 
     @Test
     public void createOrderTest(){
-        OrderDto testDto = new OrderDto(" ", "123123@", "1203917702", 1, "19000", "2020-04-07", "250", null);
+//        OrderDto testDto = new OrderDto(" ", "123123@", "1203917702", 1, "19000", "2020-04-07", "250", null);
 //        실제 데이터 생성이므로 주의
 //        orderService.createOrder(testDto);
 //        orderService.createOrder(testDto);
