@@ -95,7 +95,6 @@ public class OrderServiceImpl implements OrderService {
         OrderType requestOrderType = OrderUtil.getOrderTypeByString(orderType);
         String parsedSpecificStatus = OrderUtil.parsingStatusUrlPatternToEnumPattern(specific);
         List<OrderState> specificOrderStateList = getSpecificOrderStateList(userid, parsedSpecificStatus, requestOrderType);
-        System.out.println(specificOrderStateList);
         List<OrderDto> completeOrderDtoList = getCompleteOrderDtoListFromOrderStateList(specificOrderStateList);
 
         return completeOrderDtoList;
