@@ -9,6 +9,6 @@
     </select>
 
     <insert id="saveOrderPointInfo">
-        insert into OrderPointInfo values (#{orderId}, #{orderComplete}, #{writeComplete})
+        insert into OrderPointInfo values (#{orderId}, #{orderComplete}, #{writeComment})
     </insert>
 </mapper>

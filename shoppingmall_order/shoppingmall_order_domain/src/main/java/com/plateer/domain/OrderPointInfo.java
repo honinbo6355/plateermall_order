@@ -11,6 +11,6 @@ public class OrderPointInfo {
 
     private String orderId;
     private String orderComplete;
-    private String writeComplete;
+    private String writeComment;
 
 }

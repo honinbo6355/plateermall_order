@@ -22,6 +22,7 @@ public class OrderPaymentServiceImpl implements OrderPaymentService {
         this.orderPaymentStore = orderPaymentStore;
     }
 
+    @Override
     public OrderPaymentInfo getOrderPaymentInfo(String orderid) {
 
         OrderOriginalPrice originalPrice = orderPaymentStore.retriveOneOriginalPriceInfo(orderid);
@@ -32,6 +33,7 @@ public class OrderPaymentServiceImpl implements OrderPaymentService {
         return orderPaymentInfo;
     }
 
+    @Override
     public void saveOrderPaymentInfo(OrderPaymentInfo orderPaymentInfo) {
 
         orderPaymentStore.saveOriginalPriceInfo(orderPaymentInfo.getOrderOriginalPrice());
