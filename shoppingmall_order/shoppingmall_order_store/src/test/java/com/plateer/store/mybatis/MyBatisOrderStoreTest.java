@@ -2,7 +2,9 @@ package com.plateer.store.mybatis;
 
 import com.plateer.MyBatisOrderTestApplication;
 import com.plateer.domain.OrderCardPayment;
+import com.plateer.domain.OrderDeliveryInfo;
 import com.plateer.domain.OrderDiscountPrice;
+import com.plateer.domain.OrderPointInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class MyBatisOrderStoreTest {
     MyBatisOrderStore orderStore;
     @Autowired
     MyBatisOrderPaymentStore orderPaymentStore;
+    @Autowired
+    MyBatisOrderInfoStore orderInfoStore;
 
 
     @Test
@@ -37,5 +41,11 @@ public class MyBatisOrderStoreTest {
 //
 //        discountPriceList.stream().forEach(orderDiscountPrice -> orderPaymentStore.saveOrderDiscountPrice(orderDiscountPrice));
 //        System.out.println(orderPaymentStore.retriveOrderDiscountPriceList("202000032"));
+
+//        orderInfoStore.saveOrderDeliveryInfo(new OrderDeliveryInfo("202000032", "성남시 중원구 도촌남로22",
+//                "성남시 중원구 도촌동", "108-1501", "나윤주먹", "없으면 가져가세요"));
+//        orderInfoStore.retriveOrderDeliveryInfo("202000032");
+//        orderInfoStore.saveOrderPointInfo(new OrderPointInfo("202000032", "77", "200"));
+//        orderInfoStore.retriveOrderPointInfo("202000032");
     }
 }
