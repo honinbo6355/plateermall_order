@@ -1,10 +1,7 @@
 package com.plateer.store.mybatis;
 
 import com.plateer.MyBatisOrderTestApplication;
-import com.plateer.domain.OrderCardPayment;
-import com.plateer.domain.OrderDeliveryInfo;
-import com.plateer.domain.OrderDiscountPrice;
-import com.plateer.domain.OrderPointInfo;
+import com.plateer.domain.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +32,9 @@ public class MyBatisOrderStoreTest {
 //        System.out.println(orderPaymentStore.retriveOneOriginalPriceInfo("202000032"));
 //        orderPaymentStore.saveOrderCardPayment(new OrderCardPayment("202000032", "우리카드", "일시불"));
 //        System.out.println(orderPaymentStore.retriveOneOrderCardPayment("202000032"));
-//        List<OrderDiscountPrice> discountPriceList = new ArrayList<>();
-//        discountPriceList.add(new OrderDiscountPrice("202000032", "카드할인", "2000"));
-//        discountPriceList.add(new OrderDiscountPrice("202000032", "포인트", "500"));
+        List<OrderDiscountPrice> discountPriceList = new ArrayList<>();
+        discountPriceList.add(new OrderDiscountPrice("202000032", "카드할인", "2000"));
+        discountPriceList.add(new OrderDiscountPrice("202000032", "포인트", "500"));
 //
 //        discountPriceList.stream().forEach(orderDiscountPrice -> orderPaymentStore.saveOrderDiscountPrice(orderDiscountPrice));
 //        System.out.println(orderPaymentStore.retriveOrderDiscountPriceList("202000032"));
@@ -47,5 +44,8 @@ public class MyBatisOrderStoreTest {
 //        orderInfoStore.retriveOrderDeliveryInfo("202000032");
 //        orderInfoStore.saveOrderPointInfo(new OrderPointInfo("202000032", "77", "200"));
 //        orderInfoStore.retriveOrderPointInfo("202000032");
+        OrderPaymentInfo paymentInfo = new OrderPaymentInfo(new OrderOriginalPrice("202000032", "500000", "2500"),
+                discountPriceList, new OrderCardPayment("202000032", "우리카드", "일시불"));
+        System.out.println(paymentInfo);
     }
 }

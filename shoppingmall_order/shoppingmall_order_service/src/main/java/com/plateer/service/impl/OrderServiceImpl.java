@@ -150,7 +150,7 @@ public class OrderServiceImpl implements OrderService {
         OrderState requestOrderState = OrderStateFactory.getNewOrderStateInstance(requestOrderType);
         List<StatusTypeEnum> statusTypeEnumList = requestOrderState.getStatusTypes();
         Map<String, Integer> userOrderStatusCount = statusTypeEnumList.stream().collect(toMap(
-                statusTypeEnum -> statusTypeEnum.toString(),
+                StatusTypeEnum::toString,
                 statusTypeEnum -> orderStateStore.getStateCountFromUserid(userid, statusTypeEnum.getStatus(), requestOrderType)));
 
         return userOrderStatusCount;
