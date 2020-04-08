@@ -3,6 +3,7 @@ package com.plateer.controller;
 import java.util.*;
 
 import com.plateer.service.impl.OrderServiceImpl;
+import com.plateer.service.impl.OrderStateServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import com.plateer.domain.OrderDto;
@@ -13,27 +14,30 @@ allowedHeaders = {"Content-Type", "X-Requested-With", "accept", "Origin", "Acces
 exposedHeaders = {"Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"}, maxAge = 3000)
 @RestController
 @RequestMapping("/api/order")
-public class OrderController {
+public class OrderStateController {
 
 	OrderServiceImpl orderService;
+	OrderStateServiceImpl orderStateService;
 
-	public OrderController(OrderServiceImpl orderService){
+	public OrderStateController(OrderStateServiceImpl orderStateService){
 
-		this.orderService = orderService;
+		this.orderStateService = orderStateService;
 	}
 
+	//빠져나갈 부분
 	@GetMapping("{orderId}")
 	public OrderDto getOrderFromOrderId(@PathVariable("orderId") String orderId){
 
-		return orderService.findOrderFromOrderId(orderId);
+		return orderService.getOrderDto(orderId);
 	}
 
 	@GetMapping("/list/{state}/{userid}")
 	public List<OrderDto> getOrderStateList(@PathVariable("state") String state, @PathVariable("userid") String userid){
 
-		return orderService.findOrderListFromUserid(userid, state);
+		return orderStateService.findOrderListFromUserid(userid, state);
 	}
 
+	//빠져나갈 부분
 	@PostMapping("/order")
 	public int order(@RequestBody OrderDto orderDto){
 
@@ -43,19 +47,19 @@ public class OrderController {
 	@GetMapping("/{original}/{changed}/{orderid}")
 	public boolean changeOrderState(@PathVariable("orderid") String orderid, @PathVariable("original") String original, @PathVariable String changed) {
 
-		orderService.changeOrderState(orderid, original, changed);
+		orderStateService.changeOrderState(orderid, original, changed);
 		return true;
 	}
 
 	@GetMapping("/count/{state}/{userid}")
 	public Map<String, Integer> getStateCountMap(@PathVariable String state, @PathVariable String userid){
 
-		return orderService.getOrderStateCount(userid, state);
+		return orderStateService.getOrderStateCount(userid, state);
 	}
 
 	@GetMapping("/specificstatelist/{state}/{specific}/{userid}")
 	public List<OrderDto> getSpecificStateList(@PathVariable String state, @PathVariable String specific, @PathVariable String userid){
 
-		return orderService.getSpecificStatusOrderList(state, specific, userid);
+		return orderStateService.getSpecificStatusOrderList(state, specific, userid);
 	}
 }

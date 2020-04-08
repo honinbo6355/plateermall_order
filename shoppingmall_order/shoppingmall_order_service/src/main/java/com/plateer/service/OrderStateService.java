@@ -5,13 +5,13 @@ import com.plateer.domain.OrderDto;
 import java.util.List;
 import java.util.Map;
 
-public interface OrderService {
+public interface OrderStateService {
 
     OrderDto findOrderFromOrderId(String orderid);
 
     List<OrderDto> findOrderListFromUserid(String userid, String orderType);
 
-    int createOrder(OrderDto orderDto);
+    void createDefaultOrderState(String orderId, String orderDate, String userId);
 
     boolean changeOrderState(String orderid, String original, String changed);
 

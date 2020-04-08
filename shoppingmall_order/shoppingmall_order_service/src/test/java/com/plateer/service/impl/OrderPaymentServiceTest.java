@@ -24,7 +24,7 @@ public class OrderPaymentServiceTest {
     @Test
     public void getOrderPaymentInfoTest() {
 
-        System.out.println(orderPaymentService.getOrderPaymentInfo("202000032"));
+        System.out.println(orderPaymentService.getOrderPaymentInfo("202000106"));
     }
 
     // 실제 데이터 생성이므로 주의

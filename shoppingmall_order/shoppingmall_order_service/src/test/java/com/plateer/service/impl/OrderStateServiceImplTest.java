@@ -10,10 +10,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = OrderServiceTestApplication.class)
-public class OrderServiceImplTest {
+public class OrderStateServiceImplTest {
 
     @Autowired
-    private OrderServiceImpl orderService;
+    private OrderStateServiceImpl orderService;
 
 
     @Test

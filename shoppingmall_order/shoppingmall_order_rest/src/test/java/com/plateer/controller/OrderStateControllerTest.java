@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest(classes = OrderRestTestApplication.class)
 @AutoConfigureMockMvc
 //@WebMvcTest(controllers = OrderController.class)
-public class OrderControllerTest {
+public class OrderStateControllerTest {
 
     @Autowired
     MockMvc mockMvc;
