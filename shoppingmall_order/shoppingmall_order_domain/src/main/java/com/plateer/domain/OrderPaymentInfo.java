@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderPaymentInfo {
 
     private int originalPrice;
