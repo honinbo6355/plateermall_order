@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plateer.store.mybatis.mapper.payment.OrderDiscountPriceMapper">
+
+    <select id="retriveDiscountPriceList" resultType="OrderDiscountPrice">
+        select * from OrderDiscountPrice where orderId = #{orderId}
+    </select>
+
+    <insert id="saveDiscountPrice">
+        insert into OrderDiscountPrice values (#{orderId}, #{discountName}, #{discountPrice})
+    </insert>
+</mapper>
+
+
