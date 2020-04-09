@@ -39,6 +39,7 @@ public class OrderServiceTest {
 //                OrderUtil.getToday(), "250", null, deliveryInfo, paymentInfo, pointInfo);
 
 //        orderService.createOrder(orderDto);
+//        orderService.createOrder(orderDto);
 
 
     }
