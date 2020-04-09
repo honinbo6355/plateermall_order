@@ -28,7 +28,7 @@ public class OrderStateServiceImplTest {
     public void findOrderFromOrderIdTest(){
 
         String orderid = "202000001";
-        System.out.println(orderService.findOrderFromOrderId(orderid));
+//        System.out.println(orderService.findOrderFromOrderId(orderid));
     }
 
     @Test

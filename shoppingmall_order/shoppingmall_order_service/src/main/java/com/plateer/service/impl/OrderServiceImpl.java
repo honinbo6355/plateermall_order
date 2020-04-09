@@ -6,7 +6,6 @@ import com.plateer.service.OrderInfoService;
 import com.plateer.service.OrderPaymentService;
 import com.plateer.service.OrderService;
 import com.plateer.service.OrderStateService;
-import com.plateer.store.OrderStore;
 import com.plateer.store.mybatis.MyBatisOrderStore;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,8 +33,6 @@ public class OrderServiceImpl implements OrderService {
 
         String newOrderId = Integer.toString(orderStore.getNewOrderid());
         OrderDto completeOrderDto = setNewOrderIdToOrderDto(orderDto, newOrderId);
-
-
         orderStore.createOrder(completeOrderDto);
         orderStateService.createDefaultOrderState(completeOrderDto.getOrderId(), completeOrderDto.getOrderDate(), completeOrderDto.getUserId());
         orderPaymentService.saveOrderPaymentInfo(completeOrderDto.getOrderPaymentInfo());
@@ -62,7 +59,6 @@ public class OrderServiceImpl implements OrderService {
         OrderDeliveryInfo requestDeliveryInfo = orderInfoService.getOrderDeliveryInfo(orderId);
         OrderPointInfo requestPointInfo = orderInfoService.getOrderPointInfo(orderId);
         OrderPaymentInfo requestPaymentInfo = orderPaymentService.getOrderPaymentInfo(orderId);
-
         requestOrder.setOrderState(requestOrderState);
         requestOrder.setOrderDeliveryInfo(requestDeliveryInfo);
         requestOrder.setOrderPointInfo(requestPointInfo);

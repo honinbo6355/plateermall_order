@@ -29,15 +29,6 @@ public class OrderStateServiceImpl implements OrderStateService {
         this.orderStateStore = orderStateStore;
     }
 
-    /*
-    OrderState가 null인 불완전한 OrderDto를 반환한다.
-     */
-    @Override
-    public OrderDto findOrderFromOrderId(String orderid) {
-
-        return orderStore.retriveOne(orderid);
-    }
-
     @Override
     public List<OrderDto> findOrderListFromUserid(String userid, String orderType) {
 
@@ -105,8 +96,6 @@ public class OrderStateServiceImpl implements OrderStateService {
 
         return completeOrderDtoList;
     }
-
-
 
     /*
     OrderState 형식의 List를 인자로 받아 완전한 OrderDto 객체의 List로 반환한다.
