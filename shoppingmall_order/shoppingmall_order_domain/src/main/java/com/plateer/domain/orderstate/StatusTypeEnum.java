@@ -1,4 +1,4 @@
-package com.plateer.domain;
+package com.plateer.domain.orderstate;
 
 public interface StatusTypeEnum {
 
