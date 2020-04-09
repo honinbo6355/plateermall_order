@@ -1,14 +1,14 @@
 package com.plateer.controller;
 
 import java.util.*;
-import java.util.function.Supplier;
 
-import com.plateer.domain.orderstate.*;
+import com.plateer.service.OrderService;
+import com.plateer.service.OrderStateService;
 import com.plateer.service.impl.OrderServiceImpl;
+import com.plateer.service.impl.OrderStateServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import com.plateer.domain.OrderDto;
-import com.plateer.domain.OrderState;
 
 @CrossOrigin(allowCredentials = "true", origins = {"*"}, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT},
 allowedHeaders = {"Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
@@ -18,23 +18,11 @@ exposedHeaders = {"Access-Control-Allow-Origin", "Access-Control-Allow-Credentia
 @RequestMapping("/api/order")
 public class OrderController {
 
-	OrderServiceImpl orderService;
+	OrderService orderService;
 
-	public OrderController(OrderServiceImpl orderService){
+	public OrderController(OrderService orderService) {
 
 		this.orderService = orderService;
-	}
-
-	@GetMapping("{orderId}")
-	public OrderDto getOrderFromOrderId(@PathVariable("orderId") String orderId){
-
-		return orderService.findOrderFromOrderId(orderId);
-	}
-
-	@GetMapping("/list/{state}/{userid}")
-	public List<OrderDto> getOrderStateList(@PathVariable("state") String state, @PathVariable("userid") String userid){
-
-		return orderService.findOrderListFromUserid(userid, state);
 	}
 
 	@PostMapping("/order")
@@ -43,22 +31,16 @@ public class OrderController {
 		return orderService.createOrder(orderDto);
 	}
 
-	@GetMapping("/{original}/{changed}/{orderid}")
-	public boolean changeOrderState(@PathVariable("orderid") String orderid, @PathVariable("original") String original, @PathVariable String changed) {
+	@GetMapping("{orderId}")
+	public OrderDto getOrderFromOrderId(@PathVariable("orderId") String orderId){
 
-		orderService.changeOrderState(orderid, original, changed);
-		return true;
+		return orderService.getOrderDto(orderId);
 	}
 
-	@GetMapping("/count/{state}/{userid}")
-	public Map<String, Integer> getStateCountMap(@PathVariable String state, @PathVariable String userid){
+	@GetMapping("/full/{orderId}")
+	public OrderDto getFullOrderInfoFromOrderId(@PathVariable("orderId") String orderId) {
 
-		return orderService.getOrderStateCount(userid, state);
+		return orderService.getFullOrder(orderId);
 	}
 
-	@GetMapping("/specificstatelist/{state}/{specific}/{userid}")
-	public List<OrderDto> getSpecificStateList(@PathVariable String state, @PathVariable String specific, @PathVariable String userid){
-
-		return orderService.getSpecificStatusOrderList(state, specific, userid);
-	}
 }

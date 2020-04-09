@@ -22,5 +22,8 @@ public class OrderDto {
 	private String selectedOptions;
 
 	private OrderState orderState;
+	private OrderDeliveryInfo orderDeliveryInfo;
+	private OrderPaymentInfo orderPaymentInfo;
+	private OrderPointInfo orderPointInfo;
 	
 }
