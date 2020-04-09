@@ -5,6 +5,7 @@ import com.plateer.domain.OrderDiscountPrice;
 import com.plateer.domain.OrderOriginalPrice;
 import com.plateer.domain.OrderPaymentInfo;
 import com.plateer.service.OrderPaymentService;
+import com.plateer.store.OrderPaymentStore;
 import com.plateer.store.mybatis.MyBatisOrderPaymentStore;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,7 @@ import java.util.List;
 @Transactional
 public class OrderPaymentServiceImpl implements OrderPaymentService {
 
-    private MyBatisOrderPaymentStore orderPaymentStore;
+    private OrderPaymentStore orderPaymentStore;
 
     public OrderPaymentServiceImpl(MyBatisOrderPaymentStore orderPaymentStore) {
 

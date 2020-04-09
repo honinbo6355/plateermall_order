@@ -2,12 +2,13 @@ package com.plateer.store.mybatis;
 
 import com.plateer.domain.OrderDeliveryInfo;
 import com.plateer.domain.OrderPointInfo;
+import com.plateer.store.OrderInfoStore;
 import com.plateer.store.mybatis.mapper.info.OrderDeliveryInfoMapper;
 import com.plateer.store.mybatis.mapper.info.OrderPointInfoMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MyBatisOrderInfoStore {
+public class MyBatisOrderInfoStore implements OrderInfoStore {
 
     private OrderDeliveryInfoMapper deliveryInfoMapper;
     private OrderPointInfoMapper pointInfoMapper;

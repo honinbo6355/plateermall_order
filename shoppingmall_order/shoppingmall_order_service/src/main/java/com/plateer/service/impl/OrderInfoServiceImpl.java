@@ -3,6 +3,7 @@ package com.plateer.service.impl;
 import com.plateer.domain.OrderDeliveryInfo;
 import com.plateer.domain.OrderPointInfo;
 import com.plateer.service.OrderInfoService;
+import com.plateer.store.OrderInfoStore;
 import com.plateer.store.mybatis.MyBatisOrderInfoStore;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OrderInfoServiceImpl implements OrderInfoService {
 
-    private MyBatisOrderInfoStore orderInfoStore;
+    private OrderInfoStore orderInfoStore;
 
     public OrderInfoServiceImpl(MyBatisOrderInfoStore orderInfoStore) {
 

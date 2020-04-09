@@ -3,6 +3,7 @@ package com.plateer.store.mybatis;
 import com.plateer.domain.OrderCardPayment;
 import com.plateer.domain.OrderDiscountPrice;
 import com.plateer.domain.OrderOriginalPrice;
+import com.plateer.store.OrderPaymentStore;
 import com.plateer.store.mybatis.mapper.payment.OrderCardPaymentMapper;
 import com.plateer.store.mybatis.mapper.payment.OrderDiscountPriceMapper;
 import com.plateer.store.mybatis.mapper.payment.OrderOriginalPriceMapper;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class MyBatisOrderPaymentStore {
+public class MyBatisOrderPaymentStore implements OrderPaymentStore {
 
     private OrderOriginalPriceMapper originalPriceInfoMapper;
     private OrderDiscountPriceMapper discountPriceInfoMapper;

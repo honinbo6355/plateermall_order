@@ -5,6 +5,8 @@ import com.plateer.domain.OrderState;
 import com.plateer.domain.orderstate.StatusTypeEnum;
 import com.plateer.domain.orderstate.*;
 import com.plateer.service.OrderStateService;
+import com.plateer.store.OrderStateStore;
+import com.plateer.store.OrderStore;
 import com.plateer.store.mybatis.MyBatisOrderStateStore;
 import com.plateer.store.mybatis.MyBatisOrderStore;
 import com.plateer.util.OrderStateFactory;
@@ -20,8 +22,8 @@ import static java.util.stream.Collectors.*;
 @Transactional
 public class OrderStateServiceImpl implements OrderStateService {
 
-    private MyBatisOrderStore orderStore;
-    private MyBatisOrderStateStore orderStateStore;
+    private OrderStore orderStore;
+    private OrderStateStore orderStateStore;
 
     public OrderStateServiceImpl(MyBatisOrderStore orderStore, MyBatisOrderStateStore orderStateStore) {
 
