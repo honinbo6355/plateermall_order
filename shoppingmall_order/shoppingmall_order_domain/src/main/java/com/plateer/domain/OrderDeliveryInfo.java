@@ -15,5 +15,6 @@ public class OrderDeliveryInfo {
     private String remainAddress;
     private String receiverName;
     private String message;
-
+    private String contactNumber;
+    private String phoneNumber;
 }

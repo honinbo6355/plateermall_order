@@ -25,7 +25,7 @@ public class OrderServiceTest {
     public void createOrderTest() {
 //        System.out.println(orderService.getOrderDto("202000032"));
 //        OrderDeliveryInfo deliveryInfo = new OrderDeliveryInfo("", "성남시 중원구 도촌남로22",
-//                "성남시 중원구 도촌동", "108-1501", "나윤주먹", "없으면 가져가세요");
+//                "성남시 중원구 도촌동", "108-1501", "나윤주먹", "없으면 가져가세요", "010-1234-1234", "010-1234-1234");
 //        List<OrderDiscountPrice> discountPriceList = new ArrayList<>();
 //        discountPriceList.add(new OrderDiscountPrice("", "카드할인", "2000"));
 //        discountPriceList.add(new OrderDiscountPrice("", "포인트", "500"));
@@ -52,6 +52,6 @@ public class OrderServiceTest {
     public void getFullOrderTest() {
 
         Arrays.stream(OrderPaymentInfo.class.getFields()).forEach(System.out::println);
-//        System.out.println(orderService.getFullOrder("202000106"));
+        System.out.println(orderService.getFullOrder("202000106"));
     }
 }

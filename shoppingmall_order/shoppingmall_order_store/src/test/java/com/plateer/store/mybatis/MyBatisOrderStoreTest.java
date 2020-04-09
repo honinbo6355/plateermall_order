@@ -40,7 +40,7 @@ public class MyBatisOrderStoreTest {
         System.out.println(orderPaymentStore.retriveOrderDiscountPriceList("202000032"));
 
         orderInfoStore.saveOrderDeliveryInfo(new OrderDeliveryInfo("202000032", "성남시 중원구 도촌남로22",
-                "성남시 중원구 도촌동", "108-1501", "나윤주먹", "없으면 가져가세요"));
+                "성남시 중원구 도촌동", "108-1501", "나윤주먹", "없으면 가져가세요", "010-1234-1234", "010-1234-1234"));
         orderInfoStore.retriveOrderDeliveryInfo("202000032");
         orderInfoStore.saveOrderPointInfo(new OrderPointInfo("202000032", "77", "200"));
         orderInfoStore.retriveOrderPointInfo("202000032");

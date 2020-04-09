@@ -14,6 +14,8 @@
         #{zipcodeAddress},
         #{remainAddress},
         #{receiverName},
-        #{message})
+        #{message},
+        #{contactNumber},
+        #{phoneNumber})
     </insert>
 </mapper>
