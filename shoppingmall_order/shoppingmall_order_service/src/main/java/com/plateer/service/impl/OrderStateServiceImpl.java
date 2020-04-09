@@ -48,6 +48,16 @@ public class OrderStateServiceImpl implements OrderStateService {
         return completeOrderDto;
     }
 
+
+    @Override
+    public OrderState getOrderStateFromOrderId(String orderId, String orderType) {
+
+        OrderType requestOrderType = OrderUtil.getOrderTypeByString(orderType);
+        OrderState requestOrderState = orderStateStore.retriveOrderStateFromOrderid(orderId, requestOrderType);
+
+        return requestOrderState;
+    }
+
     @Override
     public void createDefaultOrderState(String orderId, String orderDate, String userId) {
 
@@ -95,6 +105,7 @@ public class OrderStateServiceImpl implements OrderStateService {
 
         return completeOrderDtoList;
     }
+
 
 
     /*

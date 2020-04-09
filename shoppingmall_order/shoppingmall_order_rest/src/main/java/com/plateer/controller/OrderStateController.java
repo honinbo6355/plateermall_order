@@ -2,6 +2,8 @@ package com.plateer.controller;
 
 import java.util.*;
 
+import com.plateer.service.OrderService;
+import com.plateer.service.OrderStateService;
 import com.plateer.service.impl.OrderServiceImpl;
 import com.plateer.service.impl.OrderStateServiceImpl;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +18,11 @@ exposedHeaders = {"Access-Control-Allow-Origin", "Access-Control-Allow-Credentia
 @RequestMapping("/api/order")
 public class OrderStateController {
 
-	OrderServiceImpl orderService;
-	OrderStateServiceImpl orderStateService;
+	OrderService orderService;
+	OrderStateService orderStateService;
 
-	public OrderStateController(OrderStateServiceImpl orderStateService){
-
+	public OrderStateController(OrderStateService orderStateService, OrderService orderService){
+		this.orderService = orderService;
 		this.orderStateService = orderStateService;
 	}
 
@@ -29,6 +31,13 @@ public class OrderStateController {
 	public OrderDto getOrderFromOrderId(@PathVariable("orderId") String orderId){
 
 		return orderService.getOrderDto(orderId);
+	}
+
+	//빠져나갈 부분
+	@GetMapping("/full/{orderId}")
+	public OrderDto getFullOrderInfoFromOrderId(@PathVariable("orderId") String orderId) {
+
+		return orderService.getFullOrder(orderId);
 	}
 
 	@GetMapping("/list/{state}/{userid}")
