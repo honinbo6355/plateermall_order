@@ -3,7 +3,7 @@ package com.plateer.store.mybatis;
 import com.plateer.domain.OrderState;
 import com.plateer.domain.orderstate.OrderType;
 import com.plateer.store.OrderStateStore;
-import com.plateer.store.mybatis.mapper.*;
+import com.plateer.store.mybatis.mapper.state.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

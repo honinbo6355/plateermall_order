@@ -1,7 +1,6 @@
 package com.plateer.service.impl;
 
 import com.plateer.OrderServiceTestApplication;
-import com.plateer.domain.OrderDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +10,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = OrderServiceTestApplication.class)
-public class OrderServiceImplTest {
+public class OrderStateServiceImplTest {
 
     @Autowired
-    private OrderServiceImpl orderService;
+    private OrderStateServiceImpl orderService;
 
 
     @Test
@@ -29,7 +28,7 @@ public class OrderServiceImplTest {
     public void findOrderFromOrderIdTest(){
 
         String orderid = "202000001";
-        System.out.println(orderService.findOrderFromOrderId(orderid));
+//        System.out.println(orderService.findOrderFromOrderId(orderid));
     }
 
     @Test
@@ -40,7 +39,7 @@ public class OrderServiceImplTest {
 
     @Test
     public void createOrderTest(){
-        OrderDto testDto = new OrderDto(" ", "testid", "1203917702", 1, "19000", "2020-04-06", "250", null);
+//        OrderDto testDto = new OrderDto(" ", "123123@", "1203917702", 1, "19000", "2020-04-07", "250", null);
 //        실제 데이터 생성이므로 주의
 //        orderService.createOrder(testDto);
 //        orderService.createOrder(testDto);
