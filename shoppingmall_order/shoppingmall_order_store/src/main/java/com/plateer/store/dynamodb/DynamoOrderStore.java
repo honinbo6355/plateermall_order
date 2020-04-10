@@ -10,6 +10,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
+import com.amazonaws.services.dynamodbv2.document.spec.ScanSpec;
 import com.google.gson.Gson;
 import com.plateer.domain.*;
 import com.plateer.domain.orderstate.NormalOrderState;
@@ -64,7 +65,11 @@ public class DynamoOrderStore {
 //        OrderDto retrivedOrderDto = gson.fromJson(retrivedJSON, OrderDto.class);
 //        System.out.println(retrivedOrderDto);
 
-
+        /* JSON으로 리스트를 READ */
+        ScanSpec scanSpec = new ScanSpec();
+        ItemCollection<ScanOutcome> scanOutCome = table.scan(scanSpec);
+        System.out.println("----------------- SCAN ------------------------");
+        scanOutCome.forEach(scannedItem -> System.out.println(scannedItem.toJSONPretty()));
 
 
         DynamoDBMapper mapper = new DynamoDBMapper(client);
